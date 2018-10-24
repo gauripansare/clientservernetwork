@@ -713,7 +713,7 @@
         -webkit-border-radius: 100%;
 }
     
-.assessmentradio:checked + .inputcircle {
+.assessmentradio:checked + .inputcircle ,#Summary .assessmentradio:checked + .inputcircle{
     color: #047a9c;
 }
     

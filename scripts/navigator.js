@@ -117,7 +117,7 @@ var _Navigator = (function () {
             this.LoadPage("p1");
         },
         LoadPage: function (pageId, jsonObj) {
-            debugger;
+           
             if (jsonObj == undefined) {
                 jsonObj = {};
             }

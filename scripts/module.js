@@ -332,7 +332,7 @@ var _ModuleCommon = (function () {
 
         },
         OnContinue: function () {
-            debugger;
+           
             $('input[type="checkbox"].incorrect').closest("label").find("span").removeClass("without-before");          
             $('input[type="checkbox"].incorrect').closest("label").css({ "font-weight": "normal" })
             //$("input[type='checkbox']:not(.correct)").k_enable();
@@ -348,6 +348,7 @@ var _ModuleCommon = (function () {
                 $("input[type='radio']").k_enable();
                 $("input[type='radio']").removeAttr("checked");
             }
+            $(".incorrect").removeClass("incorrect")
            
             $("#div_feedback").hide();
             $('html,body').animate({ scrollTop: document.body.scrollHeight}, 500, function () {  $("#div_feedback .div_fdkcontent").empty();});
@@ -432,7 +433,7 @@ var _ModuleCommon = (function () {
     }
 })();
 $(document).ready(function () {
-    debugger;
+    
     _Navigator.Start();
     //$("h1:first").focus();
 

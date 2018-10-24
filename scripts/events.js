@@ -70,7 +70,7 @@ $(document).on("click", "#linknext", function (event) {
     _Navigator.Next();
 });
 $(document).on("click", ".hintlink", function (event) {
-    debugger;
+    
     if ($(this).hasClass("expanded")) {
         $(".hintlink").removeClass("expanded")
         $(".hintlink").attr("aria-expanded", "false")
@@ -172,7 +172,7 @@ $(document).on("click", ".assessmentSubmit", function (event) {
     _Navigator.Next();
 });
 $(document).on('click', "#textareasubmitbtn", function (event) {
-    debugger;
+   
     $("#textareainputhere").k_disable();
     $("#textareasubmitbtn").k_disable();
     _Navigator.GetCurrentPage().isAnswered = true;
