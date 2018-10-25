@@ -159,6 +159,7 @@ function showUserReviewMode(){
 				}
 				$("input[type='radio']").k_disable();
 				$("#linknext").k_enable();
+				$(".assessmentSubmit").hide();
 }
 
 function showSummary(){
