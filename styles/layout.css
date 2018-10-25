@@ -358,7 +358,7 @@ div, p, span, input {
 .progressDiv {
     float: left;
     width: 135px;
-    border-right: #cccccc 1px solid;
+    /* border-right: #cccccc 1px solid; */
     margin-left: -10px;
 }
 
@@ -366,6 +366,7 @@ div, p, span, input {
     float: left;
     width: 100px;
     margin-left: 1px;
+    display:none;
 }
 
 .hintcontainer {
