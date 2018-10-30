@@ -74,7 +74,7 @@ function showQuestion(){
 	 if(gRecordData.Status == "NotStarted"){
 		 gRecordData.Status = "Started";
 	 }
-	$("#QuetionText").html( "<span style='font-size:0px'>Question Number </span><span >" + (currentQuestionIndex + 1) + ") &nbsp;</span>" + currQustion.QuestionText)
+	$("#QuetionText").html( "<span style='font-size:0px'>Question Number </span><span style='display:inline-block;vertical-align:top;' >" + (currentQuestionIndex + 1) + ") &nbsp;</span><span style='display:inline-block;width:95%'>" + currQustion.QuestionText+"</span>")
 
 	if(currQustion.UserSelectedOptionId == ""){
 		// randomize options
