@@ -3,7 +3,12 @@
         return this.removeClass('disabled').attr("aria-disabled", "false").removeAttr("disabled");
     },
     k_disable: function () {
-        return this.addClass('disabled').attr("aria-disabled", "true").attr("disabled", "disabled");
+       this.addClass('disabled').attr("aria-disabled", "true").attr("disabled", "disabled");
+        if(isIE11version)
+        {
+            $(this).removeAttr("aria-disabled")
+        }
+        return;
     },
     k_IsDisabled: function () {
         if (this.hasClass('disabled')) { return true; } else { return false; }
