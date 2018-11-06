@@ -187,7 +187,7 @@ var _Navigator = (function () {
                         }
                         else{
                             $("#progressdiv").focus();
-                            setReader("titleheader");
+                            
                         }
                         _Navigator.GetBookmarkData();
                     });

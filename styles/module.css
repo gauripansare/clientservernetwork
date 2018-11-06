@@ -847,10 +847,10 @@
         left: -13px !important;     
     }
     .radio-fa-check{
-        bottom: 7px !important;
+        bottom: 6px !important;
         }
      .radio-fa-check-incorrect{
-            right: 16px !important;
+            right: 11px !important;
         }
         #radio-elements input[type="radio"]:checked + label span{
             padding-left: 7px;

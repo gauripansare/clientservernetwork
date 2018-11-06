@@ -316,6 +316,10 @@ var _ModuleCommon = (function () {
             if (currentPageData.pageId != "p10" && currentPageData.pageId != "p1") {
                 this.SetRadioboxPosition();
             }
+            
+            if(isFirefox && currentPageData.pageId != "p1" && currentPageData.pageId != "p10"){
+                this.FFCustomCheckboxAccessbility();
+            }
 
         },
         SetRadioboxPosition: function () {
@@ -460,6 +464,10 @@ var _ModuleCommon = (function () {
             $("#div_feedback").hide();
             $(".checkmark").show();
             $(".ffreading").remove();
+            var currentPageobj = _Navigator.GetCurrentPage();
+            if(isFirefox && currentPageobj.pageId != "p1" && currentPageobj.pageId != "p10"){
+                this.FFCustomCheckboxAccessbility();
+            }
                 if (isIOS) {
                     $("#radio-elements legend").attr("role", "text")
                 }
@@ -553,6 +561,17 @@ var _ModuleCommon = (function () {
             else {
                 $("footer").show();
                 $("#linknext").k_enable();
+            }
+        },
+        FFCustomCheckboxAccessbility: function(){
+            var cradioboxarray = $("input[type='radio']").map(function () {
+                return $(this).attr("id");
+            }).get();
+            for (var i = 0; i < cradioboxarray.length; i++) {
+                var aria_label = $("label[for='"+cradioboxarray[i]+"'] p:first").html();
+                $("label[for='"+cradioboxarray[i]+"'] ").attr("aria-hidden","true");
+                $("#"+cradioboxarray[i]).attr("aria-label", aria_label +" Server");
+
             }
         },
         IECustomCheckboxAccessbility: function () {
