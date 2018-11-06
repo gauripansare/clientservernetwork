@@ -179,10 +179,6 @@
     width: 100%;
 }
 
-.text-content {
-    /*margin: 0 8%;*/
-}
-
 .checkbox-group {
     background: #fff;
     border-radius: 5px;
@@ -470,10 +466,6 @@
     font-weight: lighter;
     z-index: 1;
 }
-
-.div_fdkcontent {
-    /*text-align: center;*/
-}
 /* SG */
 .disabled {
     cursor: not-allowed;
@@ -488,14 +480,6 @@
 /*intro-content CSS Start */
 .intro-content {
     padding-bottom: 15px;
-}
-
-.pageheading {
-    /*margin: 0% 8%;*/
-}
-
-.intro-content h2 {
-    /*margin: 0% 5%;*/
 }
 
 

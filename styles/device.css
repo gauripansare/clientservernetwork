@@ -127,12 +127,7 @@
             font-size: 13px;
         }
 
-        #footer-navigation .previous, #footer-navigation .next {
-            /*margin-top: 2%;
-        padding: 0% 8% 3% 0%;
-        display: inline-table;*/
-        }
-
+        
         #footer-div {
             margin-left: 8%;
         }
@@ -190,15 +185,7 @@
     }
 
         @media screen and (max-width : 480px) {
-
-            #header-title:not(.startpage) img {
-                /*display: none;*/
-            }
-
-            .statpageheadmargin {
-                /*margin-top:60px !important;*/
-            }
-
+            
         #radio-elements input[type="radio"]:checked + span:before {
             right: 116px;
         }

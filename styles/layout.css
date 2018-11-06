@@ -91,11 +91,6 @@ div, p, span, input {
     max-width: 990px;
 }
 
-.headmargin {
-    /* margin-top: 144px; */
-    /* margin-top: 85px; */
-}
-
 #wrapper {
     width: 100%;
     height: auto;
