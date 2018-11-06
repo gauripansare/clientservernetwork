@@ -13,6 +13,9 @@
             bottom: 5px;
             right: 11px;
         }
+        #radio-elements label{
+            margin-left: 5%;
+        }
     }
 
     @media screen and (max-width: 912px) {
@@ -48,7 +51,7 @@
             }
 
             #radio-elements label {
-                margin-left: 10%;
+                margin-left: 5%;
                 margin-top: 3%;
             }
         }
@@ -63,7 +66,7 @@
             }
 
             #radio-elements label {
-                margin-left: 8%;
+                margin-left: 5%;
                 margin-top: 3%;
             }
 
@@ -71,7 +74,11 @@
                 margin: 0 10% !important;
             }
         }
-
+    @media screen and (max-width: 840px) {
+        #radio-elements label {
+            margin-left: 4%;
+        }
+    }
     @media screen and (max-width : 768px) {
         .intro-content {
             margin: 0% 4%;
@@ -86,7 +93,7 @@
             }
 
             #radio-elements label {
-                margin-left: 6%;
+                margin-left: 4%;
                 /* margin-top: 3%; */
             }
 
