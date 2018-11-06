@@ -3,10 +3,9 @@
         return this.removeClass('disabled').attr("aria-disabled", "false").removeAttr("disabled");
     },
     k_disable: function () {
-       this.addClass('disabled').attr("aria-disabled", "true").attr("disabled", "disabled");
-        if(isIE11version)
-        {
-            $(this).removeAttr("aria-disabled")
+        this.addClass('disabled').attr("aria-disabled", "true").attr("disabled", "disabled");
+        if (isIE11version) {
+            $(this).removeAttr("disabled")
         }
         return;
     },
@@ -33,20 +32,25 @@ var _ModuleCommon = (function () {
                 }
             }
         },
-        RemoveReviewData:function(){
+        GetReviewData: function () {
+            return reviewData;
+        },
+        SetReviewData: function (rData) {
+            reviewData = rData;
+        },
+        RemoveReviewData: function () {
             var currentPageData = _Navigator.GetCurrentPage();
             index = -1;
             if (reviewData != undefined && reviewData.length > 0) {
                 for (var i = 0; i < reviewData.length; i++) {
                     if (reviewData[i].pageId == currentPageData.pageId) {
-                        index =i;
+                        index = i;
                         break;
                     }
                 }
             }
-            if(i > -1)
-            {
-                reviewData.splice(i,1);
+            if (i > -1) {
+                reviewData.splice(i, 1);
             }
 
         },
@@ -61,14 +65,15 @@ var _ModuleCommon = (function () {
             var fdkurl = "";
             if (pageData != undefined && reviewData != undefined) {
                 fdkurl = reviewData.fdkurl;
-                
+
                 $("#div_feedback").show();
                 $("#div_feedback").css("display", "inline-block");
                 $("#div_feedback .div_fdkcontent").load(fdkurl, function () {
                     //this.SetFeedbackTop()
-                    $("body").animate({
+                    /*$("body").animate({
                         scrollTop: $(document).height()
                     }, 1000);
+                    */
                 });
             }
         },
@@ -89,9 +94,9 @@ var _ModuleCommon = (function () {
                 $("textarea").k_disable();
             }
             else {
-            $("input").k_disable();
-            this.DisplayCorrectIncorrect();
-            this.ShowFeedbackReviewMode();
+                $("input").k_disable();
+                this.DisplayCorrectIncorrect();
+                this.ShowFeedbackReviewMode();
             }
         },
         ShowTextareaReviewMode: function () {
@@ -104,49 +109,52 @@ var _ModuleCommon = (function () {
         DisplayCorrectIncorrect: function () {
             var pageDetailData = this.GetPageDetailData();
             var pageReviewData = this.GetPageReviewData();
-
             if (reviewData != undefined) {
-                $("#"+pageReviewData.radio).prop("checked","true");
-                $('input[type="radio"]:checked').closest("label").find("span").addClass("without-before")
+                $("#" + pageReviewData.radio).prop("checked", "true");
+                $('input[type="radio"]:checked').next("label").find("span").addClass("without-before")
                 if (pageDetailData.radio == pageReviewData.radio) {
 
-                    $("#" + pageDetailData.radio).before(' <i class="fa radio-fa-check fa-check" style="font-size:15px;color:#01662C;"></i>');
+                    $("#" + pageDetailData.radio).next("label").find("span").before(' <i class="fa radio-fa-check fa-check" style="font-size:15px;color:#01662C;"></i>');
                     $("#" + pageDetailData.radio).addClass("correct");
-                    $('input[type="radio"]:checked').closest("label").find("span").addClass("without-before")
                 }
                 else {
-                    $('input[type="radio"]:checked').closest("label").find("span").addClass("without-before")
-                    $("#" + pageReviewData.radio).before(' <i class="fa radio-fa-check-incorrect fa-times" style="font-size:20px;color:#B22222"></i>');
+
+                    $("#" + pageReviewData.radio).next("label").find("span").before(' <i class="fa radio-fa-check-incorrect fa-times" style="font-size:20px;color:#B22222"></i>');
                     $("#" + pageReviewData.radio).addClass("incorrect");
-                    $("#" + pageDetailData.radio).before(' <i class="fa radio-fa-check fa-check" style="font-size:15px;color:#01662C;"></i>');
+                    $("#" + pageDetailData.radio).next("label").find("span").before(' <i class="fa radio-fa-check fa-check" style="font-size:15px;color:#01662C;"></i>');
                     $("#" + pageDetailData.radio).addClass("correct");
                 }
 
                 for (var i = 0; i < pageReviewData.checkbox.length; i++) {
-                    $("#"+pageReviewData.checkbox[i]).prop("checked","true");
+                    $("#" + pageReviewData.checkbox[i]).prop("checked", "true");
                     if (pageDetailData.checkbox.indexOf(pageReviewData.checkbox[i]) >= 0) {
                         $(".checkmark").hide();
-                        $("#" + pageReviewData.checkbox[i]).after(' <i class="fa fa-check" style="font-size:20px;color:#01662C;"></i>');
+                        $("#" + pageReviewData.checkbox[i]).next("label").append(' <i class="fa fa-check" style="font-size:20px;color:#01662C;"></i>');
                         $("#" + pageReviewData.checkbox[i]).addClass("correct");
-                        $("#" + pageReviewData.checkbox[i]).closest("label").css({ "font-weight": "bold" })
+                        $("#" + pageReviewData.checkbox[i]).next("label").css({ "font-weight": "bold" })
                     }
                     else {
                         $(".checkmark").hide();
-                        $("#" + pageReviewData.checkbox[i]).after(' <i class="fa fa-times" style="font-size:20px;color:#B22222"></i>');
+                        $("#" + pageReviewData.checkbox[i]).next("label").append(' <i class="fa fa-times" style="font-size:20px;color:#B22222"></i>');
                         $("#" + pageReviewData.checkbox[i]).addClass("incorrect");
-                        $("#" + pageReviewData.checkbox[i]).closest("label").css({ "font-weight": "bold" })
+                        $("#" + pageReviewData.checkbox[i]).next("label").css({ "font-weight": "bold" })
                     }
-                    $("#" + pageReviewData.checkbox[i]).closest("label").find(".checkmark").removeClass("checkmark");
+                    $("#" + pageReviewData.checkbox[i]).next("label").find(".checkmark").removeClass("checkmark");
                 }
                 for (var i = 0; i < pageDetailData.checkbox.length; i++) {
-                    if ($("#" + pageDetailData.checkbox[i]).closest("label").find(".checkmark").length > 0) {
+                    if ($("#" + pageDetailData.checkbox[i]).next("label").find(".checkmark").length > 0) {
                         $("#" + pageDetailData.checkbox[i]).addClass("correct");
-                        $("#" + pageDetailData.checkbox[i]).after(' <i class="fa fa-check" style="font-size:20px;color:#01662C;"></i>');
-                        $("#" + pageDetailData.checkbox[i]).closest("label").find(".checkmark").removeClass("checkmark");
+                        $("#" + pageDetailData.checkbox[i]).next("label").append(' <i class="fa fa-check" style="font-size:20px;color:#01662C;"></i>');
+                        //$("#" + pageDetailData.checkbox[i]).addClass("correct");
+                        $("#" + pageDetailData.checkbox[i]).next("label").find(".checkmark").removeClass("checkmark");
+                        //$("#" + pageDetailData.checkbox[i]).closest("label").css({ "font-weight": "bold" })
                     }
                 }
             }
             this.SetAccessibility();
+            if (isFirefox || isIE11version) {
+                this.SetCustomarialabelforRadio();
+            }
         },
         DisplayReviewForOneIncorrect: function () {
             var chkboxarray = $("input[type='checkbox']:checked").map(function () {
@@ -156,70 +164,139 @@ var _ModuleCommon = (function () {
             var radio = $("input[type='radio']:checked").attr("id")
             correctcnt = 0;
             if (pageDetailData.radio == radio) {
-                $("#" + pageDetailData.radio).before(' <i class="fa radio-fa-check fa-check" style="font-size:15px;color:#01662C;"></i>');
+                $("#" + pageDetailData.radio).next("label").find("span").before(' <i class="fa radio-fa-check fa-check" style="font-size:15px;color:#01662C;"></i>');
                 $("#" + pageDetailData.radio).addClass("correct");
-                $('input[type="radio"]:checked').closest("label").find("span").addClass("without-before")
             }
             else {
-                $('input[type="radio"]:checked').closest("label").find("span").addClass("without-before")
-                $("#" + radio).before(' <i class="fa radio-fa-check-incorrect fa-times" style="font-size:20px;color:#B22222"></i>');
+                $('input[type="radio"]:checked').next("label").find("span").addClass("without-before")
+                $("#" + radio).next("label").find("span").before(' <i class="fa radio-fa-check-incorrect fa-times" style="font-size:20px;color:#B22222"></i>');
                 $("#" + radio).addClass("incorrect");
             }
 
+            $(".checkmark").hide();
             for (var i = 0; i < chkboxarray.length; i++) {
                 if (pageDetailData.checkbox.indexOf(chkboxarray[i]) >= 0) {
-                    $("#" + chkboxarray[i]).after(' <i class="fa fa-check" style="font-size:20px;color:#01662C;"></i>');
+                    $("#" + chkboxarray[i]).next("label").append(' <i class="fa fa-check" style="font-size:20px;color:#01662C;"></i>');
                     $("#" + chkboxarray[i]).addClass("correct");
                     correctcnt++;
                 }
                 else {
-                    $("#" + chkboxarray[i]).after(' <i class="fa fa-times" style="font-size:20px;color:#B22222"></i>');
+                    $("#" + chkboxarray[i]).next("label").append(' <i class="fa fa-times" style="font-size:20px;color:#B22222"></i>');
                     $("#" + chkboxarray[i]).addClass("incorrect");
                 }
 
-                $("#" + chkboxarray[i]).closest("label").find(".checkmark").removeClass("checkmark");
+                $("#" + chkboxarray[i]).next("label").find(".checkmark").removeClass("checkmark");
             }
-            
-            this.Applycss(); 
+
+            this.Applycss();
             this.SetAccessibility();
+            if (isFirefox || isIE11version) {
+                this.SetCustomarialabelforRadio();
+            }
         },
-        SetAccessibility:function(){
+        SetAccessibility: function () {
             var radio = $("input[type='radio']:checked").attr("id")
             var rarialabel = "";
-           if( $("#"+radio).hasClass("correct")){
-                rarialabel ="Correct option";
-           }
-           else
-           {
-               $("input[type='radio'].correct").closest("label").find("i").attr("aria-label","Correct option")
-                rarialabel ="Incorrect option selected";
-           }
-           $("#"+radio).closest("label").find("i").attr("aria-label",rarialabel);
-           var chkboxarray = $("input[type='checkbox']").map(function () {
-            return $(this).attr("id");
+            if ($("#" + radio).hasClass("correct")) {
+                rarialabel = "Correct option selected" + $("#" + radio).next("label").text();
+                $("#" + radio).next("label").attr("aria-hidden", "true");
+            }
+            else {
+                $("input[type='radio'].correct").attr("aria-label", "Correct option");
+                rarialabel = "Incorrect option selected " + $("#" + radio).next("label").text();
+                $("#" + radio).next("label").attr("aria-hidden", "true");
+            }
+            $("#" + radio).attr("aria-label", rarialabel);
+            var chkboxarray = $("input[type='checkbox']").map(function () {
+                return $(this).attr("id");
             }).get();
             var carialabel = "";
             for (var i = 0; i < chkboxarray.length; i++) {
-                carialabel ="";
-                if($("#" + chkboxarray[i]).hasClass("correct"))
-                {
-                    carialabel ="Correct option";
+                carialabel = "";
+                if ($("#" + chkboxarray[i]).hasClass("correct")) {
+                    $("#" + chkboxarray[i]).attr("cheked", "true");
+                    carialabel = "Correct option selected " + $("#" + chkboxarray[i]).next("label").text();
+                    $("#" + chkboxarray[i]).next("label").attr("aria-hidden", "true");
                 }
-                else
-                {
-                    carialabel ="Incorrect option selected";
+                else if ($("#" + chkboxarray[i]).hasClass("incorrect")) {
+                    carialabel = "Incorrect option selected " + $("#" + chkboxarray[i]).next("label").text();
+                    $("#" + chkboxarray[i]).next("label").attr("aria-hidden", "true");
                 }
-                $("#" + chkboxarray[i]).closest("label").find("i").attr("aria-label", carialabel)
+                $("#" + chkboxarray[i]).attr("aria-label", carialabel);
             }
 
         },
+        SetCustomarialabelforRadio: function () {
+            $("input[type='radio']").each(function () {
+                var ischecked = "\n radio button unavailable"
+                if ($(this).prop("checked") == "true" || $(this).prop("checked") == true) {
+                    ischecked = ischecked + " checked "
+                }
+                else {
+                    ischecked = ischecked + " not checked "
+                }
+                var radioalabel = "";
+                if ($(this).hasClass("correct")) {
+                    radioalabel = ischecked + " correct option " + $(this).next("label").text();
+                }
+                else if ($(this).hasClass("correct") && $(this).prop("checked")) {
+                    radioalabel = ischecked + " correct option selected" + $(this).next("label").text();
+                }
+                else if ($(this).hasClass("incorrect") && $(this).prop("checked")) {
+                    radioalabel = ischecked + " incorrect option selected" + $(this).next("label").text();
+                }
+                else {
+                    radioalabel = ischecked + $(this).next("label").text();
+                }
+                radioalabel = radioalabel;
+                $(this).next("label").after("<label class='ffreading'>" + radioalabel + "</label>");
+                $(this).attr("aria-hidden", "true");
+                $(this).next("label").attr("aria-hidden", "true");
+                //$(this).closest("div").find("*").attr("aria-hidden", "true")
+
+            });
+
+            var chkboxarray = $("input[type='checkbox']").map(function () {
+                return $(this).attr("id");
+            }).get();
+            var carialabel = "";
+            for (var i = 0; i < chkboxarray.length; i++) {
+                var ischecked = "\n checkbox unavailable"
+                carialabel = "";
+                if ($("#" + chkboxarray[i]).prop("checked") == "true" || $("#" + chkboxarray[i]).prop("checked") == true) {
+                    ischecked = ischecked + " checked "
+                }
+                else {
+                    ischecked = ischecked + " not checked "
+                }
+                if ($("#" + chkboxarray[i]).hasClass("correct")) {
+                    carialabel = ischecked + " Correct option  " + $("#" + chkboxarray[i]).next("label").text();
+                    $("#" + chkboxarray[i]).next("label").attr("aria-hidden", "true");
+                }
+                else if ($("#" + chkboxarray[i]).hasClass("correct") && $(this).prop("checked")) {
+                    $("#" + chkboxarray[i]).attr("checked", "true");
+                    carialabel = ischecked + " Correct option selected " + $("#" + chkboxarray[i]).next("label").text();
+                    $("#" + chkboxarray[i]).next("label").attr("aria-hidden", "true");
+                }
+                else if ($("#" + chkboxarray[i]).hasClass("incorrect")) {
+                    carialabel = ischecked + " Incorrect option selected " + $("#" + chkboxarray[i]).next("label").text();
+                    $("#" + chkboxarray[i]).next("label").attr("aria-hidden", "true");
+                }
+                else {
+                    carialabel = ischecked + $("#" + chkboxarray[i]).next("label").text();
+                }
+                $("#" + chkboxarray[i]).next("label").after("<label class='ffreading'>" + carialabel + "</label>")
+                $("#" + chkboxarray[i]).attr("aria-hidden", "true");
+                $("#" + chkboxarray[i]).next("label").attr("aria-hidden", "true");
+            }
+            //$("#ffread").text(carialabel).css({"opacity":"0","font-size":"0"});
+        },
         OnPageLoad: function () {
             var pageDetailData = this.GetPageDetailData();
-            $("#textareasubmitbtn").k_disable();
-            //this.ApplycontainerWidth();
+            var currentPageData = _Navigator.GetCurrentPage();
+            this.ApplycontainerWidth();
             $("#div_feedback").hide();
-            if(pageDetailData!=undefined && pageDetailData.radio !=undefined)
-            {
+            if (pageDetailData != undefined && pageDetailData.radio != undefined) {
                 $("input[type='checkbox']").addClass("pagecheckbox");
                 $("input[type='radio']").addClass("pageradio");
                 $("#submitbtn").k_disable();
@@ -227,32 +304,50 @@ var _ModuleCommon = (function () {
             if (_Navigator.IsAnswered() && !_Navigator.GetCurrentPage().isStartPage) {
                 this.DisplayUserReviewMode();
             }
-            else
-            {
-                this.RemoveReviewData();
-            }
             if (_Navigator.IsPresenterMode() == true) {
-                LoadPresenterMod();
+                $(".startbtn").k_disable();
+                $("#linknext").k_enable();
+
+                if (currentPageData.pageId != "p10" && currentPageData.pageId != "p1") {
+                    this.LoadPresenterMod();
+                }
+            }
+
+            if (currentPageData.pageId != "p10" && currentPageData.pageId != "p1") {
+                this.SetRadioboxPosition();
             }
 
         },
-        LoadPresenterMod:function(){
-            $("#linknext").k_enable();
-            $("#" + pageDetailData.radio).before(' <i class="fa radio-fa-check fa-check" style="font-size:15px;color:#01662C;"></i>');
-            $("#" + pageDetailData.radio).addClass("correct");  
-            $("input[type='radio']").k_disable();
-           for(var i =0; i< pageDetailData.checkbox.length; i++){
-            $("#" + pageDetailData.checkbox[i]).after(' <i class="fa radio-fa-check fa-check" style="font-size:20px;color:#01662C;"></i>');
-            $("#" + pageDetailData.checkbox[i]).addClass("correct"); 
-            $("#" + pageDetailData.checkbox[i]).closest("label").css("font-weight","bold"); 
-            $("input[type='checkbox']").k_disable();
-            $("input[type='checkbox']").closest("label").find(".checkmark").removeClass("checkmark");
-           }   
+        SetRadioboxPosition: function () {
+            var radiobtns = $('input[type="radio"]');
+            for (var i = 0; i < radiobtns.length; i++) {
+                var css1 = $("#" + radiobtns[i].id).next("label").position();
+                $("#" + radiobtns[i].id).css({ "left": (Number(css1.left) + 50), "top": (Number(css1.top) + 15) });
+            }
         },
-        Applycss: function(){
-            
+        LoadPresenterMod: function () {
+            var pageDetailData = this.GetPageDetailData();
+            $("#" + pageDetailData.radio).next("label").find("span").before(' <i class="fa radio-fa-check fa-check" style="font-size:15px;color:#01662C;"></i>');
+            $("#" + pageDetailData.radio).addClass("correct").attr('checked', 'checked');
+            $("input[type='radio']").k_disable();
+            $("input[type='checkbox']").next("label").find("span").hide();
+            for (var i = 0; i < pageDetailData.checkbox.length; i++) {
+                $("#" + pageDetailData.checkbox[i]).next("label").find("span").before(' <i class="fa radio-fa-check fa-check" style="font-size:20px;color:#01662C;"></i>');
+                $("#" + pageDetailData.checkbox[i]).addClass("correct").attr('checked', 'checked');
+                $("#" + pageDetailData.checkbox[i]).next("label").css("font-weight", "bold");
+                $("input[type='checkbox']").k_disable();
+                $("input[type='checkbox']").next("label").find(".checkmark").removeClass("checkmark");
+            }
+            this.SetAccessibility();
+            if (isFirefox || isIE11version) {
+                this.SetCustomarialabelforRadio();
+            }
+
+        },
+        Applycss: function () {
+
             var isIE11version = !!navigator.userAgent.match(/Trident.*rv\:11\./);
-            if (/Edge/.test(navigator.userAgent) || isIE11version ) {   
+            if (/Edge/.test(navigator.userAgent) || isIE11version) {
                 $('input[type="radio"]:checked').closest("label").find(".radio-fa-check").css("bottom", "7px")
             }
         },
@@ -287,13 +382,12 @@ var _ModuleCommon = (function () {
             var pageData = this.GetPageDetailData();
             var fdbkUrl = "";
             _Navigator.IncrementCounter();
-            if ($("input[type='radio']:checked").attr("id") == pageData.radio) {                
-                $('input[type="radio"]:checked').closest("label").find("span").addClass("without-before")
+            if ($("input[type='radio']:checked").attr("id") == pageData.radio) {
+                $('input[type="radio"]:checked').next("label").find("span").addClass("without-before")
                 if (this.CalculateScore() == 2) {
                     fdbkUrl = _Settings.dataRoot + "feedbackdata/" + pageData.correctfeedback;
                 }
-                else 
-                {
+                else {
                     if (_Navigator.GetCounter() == 1) {
                         fdbkUrl = _Settings.dataRoot + "feedbackdata/" + pageData.partialfeedback1;
                         this.DisplayReviewForOneIncorrect();
@@ -309,11 +403,12 @@ var _ModuleCommon = (function () {
                     _Navigator.SetPageScore(this.CalculateScore())
                     _Navigator.SetPageStatus(true);
                     this.EnableNext();
+                    _Navigator.GetBookmarkData();
                 }
-               
+
             }
             else {
-                
+
                 if (_Navigator.GetCounter() == 1) {
                     this.AddReviewData(false);
                     this.DisplayReviewForOneIncorrect();
@@ -326,40 +421,48 @@ var _ModuleCommon = (function () {
                     _Navigator.SetPageScore(this.CalculateScore())
                     _Navigator.SetPageStatus(true);
                     this.EnableNext();
+                    _Navigator.GetBookmarkData();
                 }
             }
             $("#div_feedback").show();
             $("input").k_disable();
             $("#div_feedback").css("display", "inline-block");
             $("#div_feedback .div_fdkcontent").load(fdbkUrl, function () {
-                $('html,body').animate({ scrollTop: document.body.scrollHeight }, 500, function () { });
+                $('html,body').animate({ scrollTop: document.body.scrollHeight }, isIphone, function () { 
+                    $("#div_feedback .div_fdkcontent p").first().attr("tabindex", "-1");
+                    $("#div_feedback .div_fdkcontent p").first().focus();
+                });
             });
 
         },
         OnContinue: function () {
-           
-            $('input[type="checkbox"].incorrect').closest("label").find("span").removeClass("without-before");          
-            $('input[type="checkbox"].incorrect').closest("label").css({ "font-weight": "normal" })
-            //$("input[type='checkbox']:not(.correct)").k_enable();
+            $(".checkmark").show();
+            $('input[type="checkbox"].incorrect').next("label").find("span").removeClass("without-before");
+            $('input[type="checkbox"].incorrect').next("label").css({ "font-weight": "normal" })
+            $("input[type='checkbox']:not(.correct)").k_enable();
             $("input[type='checkbox']:not(.correct)").removeAttr("checked");
-            $("input[type='checkbox']:not(.correct)").closest("label").find("span").addClass("checkmark")
-            $("input[type='checkbox']:not(.correct)").closest("label").find("i").remove();
-            if (!$('input[type="checkbox"]').hasClass("correct")){
-                $("input[type='checkbox']:not(.correct)").k_enable();
-            }
+            $("input[type='checkbox']:not(.correct)").removeAttr("aria-label")
+            $("input[type='checkbox']:not(.correct)").next("label").find("span").addClass("checkmark")
+            $("input[type='checkbox']:not(.correct)").next("label").find("i").remove();
+            $('input[type="checkbox"]').removeAttr("aria-hidden");
+
             if (!$('input[type="radio"]:checked').hasClass("correct")) {
-                $('input[type="radio"]:checked').closest("label").find("span").removeClass("without-before")
-                $('input[type="radio"]:checked').closest("label").find("i").remove();
+                $('input[type="radio"]:checked').next("label").find("span").removeClass("without-before")
+                $('input[type="radio"]:checked').next("label").find("i").remove();
                 $("input[type='radio']").k_enable();
                 $("input[type='radio']").removeAttr("checked");
             }
-            $(".incorrect").removeClass("incorrect")
-           
+            $("input[type='radio']").removeClass("incorrect");
+            $('input[type="radio"]').removeAttr("aria-hidden");
             $("#div_feedback").hide();
-            $('html,body').animate({ scrollTop: document.body.scrollHeight}, 500, function () {  $("#div_feedback .div_fdkcontent").empty();});
-            //$('html,body').animate({ scrollTop: 0 }, 500, function () { enable(); });
+            $(".checkmark").show();
+            $(".ffreading").remove();
+            $('html,body').animate({ scrollTop: document.body.scrollHeigh }, 500, function () { 
+                $("#radio-elements legend").attr("tabindex", "-1");
+                $("#radio-elements legend").focus();
+            });
         },
-        AddReviewData: function (isCorrect,fdkurl) {
+        AddReviewData: function (isCorrect, fdkurl) {
             var pageData = this.GetPageDetailData();
             var currentPageData = _Navigator.GetCurrentPage();
             var found = false;
@@ -401,7 +504,7 @@ var _ModuleCommon = (function () {
         },
 
         ApplycontainerWidth: function () {
-            
+
             var innerWidth = $(window).width();
 
             $("#header-title img").attr("src", "assets/images/logo.png")
@@ -434,12 +537,51 @@ var _ModuleCommon = (function () {
                 $("#div_feedback").css("margin-top", (pdiff + 35) + "px");
             }
         },
+        AppendFooter: function () {
+            if ($(".presentationModeFooter").length == 0) {
+                var str = '<div class="presentationModeFooter">Presentation Mode</div>';
+                $("footer").append($(str));
+                $("footer").show();
+                $("#linknext").k_enable();
+            }
+            else {
+                $("footer").show();
+                $("#linknext").k_enable();
+            }
+        },
+        IECustomCheckboxAccessbility: function () {
+            var chkboxarray = $("input[type='checkbox']").map(function () {
+                return $(this).attr("id");
+            }).get();
+            var labeltext = "";
+            for (var i = 0; i < chkboxarray.length; i++) {
+                labeltext = "";
+                if ($("#" + chkboxarray[i]).hasClass("correct")) {
+                    $("#" + chkboxarray[i]).attr("checked", "true");
+                    labeltext = " Correct option selected " + $("#" + chkboxarray[i]).next("label").text();
+                    $("#" + chkboxarray[i]).next("label").attr("aria-hidden", "true");
+                    $("#" + chkboxarray[i]).attr("aria-hidden", "true");
+                }
+                else if ($("#" + chkboxarray[i]).hasClass("incorrect")) {
+                    labeltext = " Incorrect option selected " + $("#" + chkboxarray[i]).next("label").text();
+                    $("#" + chkboxarray[i]).next("label").attr("aria-hidden", "true");
+                    $("#" + chkboxarray[i]).attr("aria-hidden", "true");
+                }
+                else {
+                    labeltext = "checkbox not Checked " + $("#" + chkboxarray[i]).next("label").text();
+                    $("#" + chkboxarray[i]).next("label").attr("aria-hidden", "true");
+                    $("#" + chkboxarray[i]).attr("aria-hidden", "true");
+                }
+                $("#" + chkboxarray[i]).next("label").after("<label class='ffreading'>" + labeltext + "</label>")
+
+            }
+        },
 
     }
 })();
 $(document).ready(function () {
-    
-    _Navigator.Start();
+
+    _Navigator.Initialize();
     //$("h1:first").focus();
 
     //if (_Settings.enableCache) {

@@ -183,8 +183,11 @@
     /*margin: 0 8%;*/
 }
 
-.radio-group, .checkbox-group {
-    /*margin: 0 8%;*/
+.checkbox-group {
+    background: #fff;
+    border-radius: 5px;
+    padding: 2%;
+    margin-top: 20px;
 }
 
 .radio-group {
@@ -223,7 +226,7 @@
 }
 
     /* Hide the browser's default checkbox */
-    .checkbox-item input {
+    #checkbox-elements input {
         position: absolute;
         opacity: 0;
         cursor: pointer;
@@ -243,12 +246,12 @@
 }
 
 /* On mouse-over, add a grey background color */
-.checkbox-item:hover input ~ .checkmark {
+.checkbox-item:hover input + .checkbox-item .checkmark {
     background-color: #ccc;
 }
 
 /* When the checkbox is checked, add a blue background */
-.checkbox-item input:checked ~ .checkmark {
+#checkbox-elements input:checked + .checkbox-item span {
     background-color: #047a9c;
     border: 2px solid #047a9c;
 
@@ -262,7 +265,7 @@
 }
 
 /* Show the checkmark when checked */
-.checkbox-item input:checked ~ .checkmark:after {
+#checkbox-elements input:checked + .checkbox-item .checkmark:after {
     display: block;
 }
 
@@ -290,18 +293,23 @@
     /*margin-right: 2%;
     margin-left: 2%;*/
 }
-
+#checkbox-elements input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
 #checkbox-elements {
     background: #fff;
     /*margin-left: 2%;
     margin-right:2%;*/
     border-radius: 5px;
-    padding: 5%;
+    padding: 0 3%;
 }
 
 #radio-elements img {
     cursor: pointer;
     width: 100px;
+    height: 100px;
     margin-top: 10px;
 }
 
@@ -321,11 +329,11 @@
     border-radius: 10px;
     padding: 0px 5px 5px 5px;
     text-align: center;
+    width: 119px;
 }
 
 #radio-elements l {
     position: relative;
-    color: black;
     /*margin-left: 15px;*/
 }
 /*Radiobutton.css*/
@@ -336,7 +344,7 @@
 }
 
     #radio-elements label + label {
-        margin-left: 6%;
+        margin-left: 13%;
     }
 
 #radio-elements {
@@ -357,7 +365,7 @@
             height: 25px;
             border: 2px solid;
             position: absolute;
-            right: 93%;
+            right: 96.2%;
             background: #FFF;
             bottom: 100px;
             border-radius: 100%;
@@ -378,24 +386,24 @@
         -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
     }
 
-        #radio-elements input[type="radio"]:checked + span {
+#radio-elements input[type="radio"]:checked + label span {
             color: #047a9c;
 }
-#radio-elements .correct:checked + span{
+#radio-elements .correct:checked + label span{
     color: #01662C !important;
 }
 
-#radio-elements .incorrect:checked + span{
+#radio-elements .incorrect:checked + label span{
     color: #B22222 !important;
 }
-#radio-elements .correct + span{
+#radio-elements .correct + label span{
     color: #01662C !important;
 }
 .without-before:before {
     content: none !important;
 }
 
-#radio-elements input[type="radio"]:checked + span:before {
+#radio-elements input[type="radio"]:checked + label span:before {
     content: '';
     width: 17px;
     height: 17px;
@@ -443,8 +451,8 @@
 
 .radio-fa-check {
     position: relative;
-    bottom: 5px;
-    right: 12px;
+    bottom: 6px;
+    right: 13px;
     float: left;
     width: 0px;
     background-color: #fff;
@@ -455,7 +463,7 @@
 .radio-fa-check-incorrect {
     position: relative;
     bottom: 8px;
-    right: 12px;
+    right: 13px;
     float: left;
     width: 0px;
     background-color: #fff;
@@ -681,7 +689,7 @@
     color: gray;
     left: -22px;
 }
-.questioninnerwrapper .inputcircle:after ,#Summary .inputcircle:after{
+.inputcircle:after {
         content: '';
         width: 23px;
         height: 23px;
@@ -699,7 +707,7 @@
         -webkit-box-sizing: border-box;
 }
     
-.assessmentradio:checked + .inputcircle:before {
+    .assessmentradio:checked + .inpputtext .inputcircle:before {
         content: '';   
         height: 15px;
         width: 15px;
@@ -713,9 +721,9 @@
         -webkit-border-radius: 100%;
 }
     
-.assessmentradio:checked + .inputcircle ,#Summary .assessmentradio:checked + .inputcircle{
-    color: #047a9c;
-}
+    .assessmentradio:checked + .inpputtext .inputcircle, #Summary .assessmentradio:checked + .inpputtext .inputcircle {
+        color: #047a9c;
+    }
     
  #questioninnerwrapper.inputcircle , #Summary.inputcircle {
     position: relative;
@@ -743,7 +751,7 @@
     .summaryquestion{
         margin-bottom: 20px;
         float: left;
-        margin-left: -40px;
+       
     }
     .summaryoptions{
         min-height: 75px;
@@ -795,11 +803,44 @@
     .question-band{
         float: left;
         margin-left: 8%;
+    position: relative;
     }
    .quetiontext{
        margin-left: 20px;
    }
-
+   .inpputtext{
+    display: block;
+    margin: 5px 0;
+}
+.radiotext{
+    margin:0;
+}
+.ffreading{
+    position: absolute !important;
+    opacity: 0;
+    font-size: 0px !important;
+}
+.checkbox-elements-div{
+    padding: 5% 0% 5% 0%;
+}
+#radio-elements input[type="radio"]:checked + label i + span:before {
+    background: none;
+}
+.presentationModeFooter {
+    display: inline-block;
+    background-color: #1a76cb;
+    height: 29px;
+    width: 100%;
+    color: white;
+    text-align: center;
+}
+.option_div img{
+    width: 100px;
+    height: 67px;
+}
+.option_div p{
+    margin: 0;
+}
    @-moz-document url-prefix() {
     #radio-elements input[type="radio"]:checked + span:before {
         
@@ -809,14 +850,9 @@
         bottom: 7px !important;
         }
      .radio-fa-check-incorrect{
-            right: 13px !important;
+            right: 16px !important;
+        }
+        #radio-elements input[type="radio"]:checked + label span{
+            padding-left: 7px;
         }    
   }
-/* Text area Feedback css */
-#div_feedback_textarea{
-    display: none;
-    height: auto;
-    /* background: #F0F0F0; */
-    width: 100%;
-}
- 

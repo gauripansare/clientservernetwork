@@ -8,6 +8,12 @@
 
     @media screen and (max-width:940px) {
     }
+    @media screen and (max-width:936px) {
+        .radio-fa-check{
+            bottom: 5px;
+            right: 11px;
+        }
+    }
 
     @media screen and (max-width: 912px) {
         .intro-content {
@@ -95,6 +101,9 @@
             .question-band {
                 margin-left: 13%;
             }
+            .option_div{
+                padding: 0 1.5%
+            }
         }
     }
 
@@ -156,8 +165,8 @@
 
         .radio-fa-check-incorrect {
             position: relative;
-            bottom: 5px;
-            right: 9px;
+            bottom: 7px;
+            right: 12px;
             float: left;
             width: 0px;
             background-color: #fff;
@@ -167,6 +176,9 @@
 
         .question-band {
             margin-left: 13%;
+        }
+        .option_div{
+            padding: 0 3.5%
         }
     }
 
@@ -185,8 +197,8 @@
         }
 
         .radio-fa-check {
-            bottom: 2px;
-            right: 9px;
+            bottom: 5px;
+            right: 12px;
         }
 
         .question-band {
@@ -220,6 +232,9 @@
         .summary-content {
             margin: 0 11% !important;
         }
+        #radio-elements input[type="radio"]:checked + label span:before{
+            bottom: 91px;
+        }
     }
 
         @media screen and (max-width: 414px) {
@@ -228,8 +243,8 @@
         }
 
         .radio-fa-check-incorrect {
-            bottom: 6px;
-            right: 10px;
+            bottom: 8px;
+            right: 12px;
         }
 
         .question-band {
@@ -267,7 +282,7 @@
         }
 
         #radio-elements label {
-            margin-left: 5%;
+            margin-left: 4%;
             margin-top: 3%;
         }
 

@@ -13,17 +13,20 @@
     <link href="styles/module.css" rel="stylesheet" />
     <link href="styles/device.css" rel="stylesheet" />
 
+    <script type="text/javascript" src="scripts/SCORM_API_wrapper.js"></script>    
     <script src="scripts/external/jquery-2.1.4.min.js"></script>
-     <script src="scripts/caching.js"></script>
+    <script src="scripts/data.js"></script>
+    <script src="scripts/scorm.js"></script>
+    <script src="scripts/caching.js"></script>
+    <script src="scripts/events.js"></script>
     <script src="scripts/module.js"></script>
     <script src="scripts/navigator.js"></script>
-    <script src="scripts/data.js"></script>
+   
     <script src="scripts/Assessment.js"></script>
     <script src="scripts/AssessmentQuestion.js"></script>
     <script src="scripts/cooker.js"></script>
     <!--<script src="scripts/BML.js"></script>-->
-    <script src="scripts/events.js"></script>
-
+    
 </head>
 
 <body>
@@ -33,7 +36,7 @@
                 <div id="header-content" class="mxwidth">
                     <div id="header-title">
                         <img src="assets/images/logo.png" alt="" height="35"/>
-                        <h1 id="titleheader">Client/Server Networks</h1>
+                        <h1 id="titleheader" tabindex="-1" >Client/Server Networks</h1>
                     </div>
                     <div id="header-progress">
                         <div class="progress">
@@ -44,15 +47,13 @@
                         </div>
                         <div class="header-informarion">
                             <div class="header-content">
-                                <div id="progressdiv" class="progressDiv">
+                                <div id="progressdiv" class="progressDiv" tabindex="-1">
                                     Progress: 0%
                                 </div>
                                 <div id="scorediv" class="scoreDiv">
                                     Score: 0%
                                 </div>
-                                <div id="hintdiv" class="hintDiv">
-                                    <a href="#" class="hintlink">Hint</a>
-                                </div>
+                                
                             </div>
                         </div>
 

@@ -206,4 +206,14 @@ $(document).on('click', "#textareasubmitbtn", function (event) {
 
 
 
+window.onload = function () {
+    _ScormUtility.Init();
+}
+
+window.onunload = function () {
+    _ScormUtility.End();
+}
+
+
+
 
