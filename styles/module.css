@@ -508,8 +508,8 @@
 }
 
 .charcount {
-    float: right;
-    margin-left: 75%;
+    width: 100%;
+    text-align: right;
 }
 /*intro-content CSS End */
 
@@ -851,7 +851,11 @@
         }
         #radio-elements input[type="radio"]:checked + label span::before
         {
-            right: 107px; 
+            right: 0; 
+            left: -17px; 
+        }
+        .radio-fa-check{
+            right: 11px;
         }    
   }
   @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {

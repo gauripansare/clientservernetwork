@@ -65,6 +65,7 @@ var _Assessment = (function () {
 
 			return array;
 		},
+
 		ShowQuestion: function () {
 
 			//addCSS("styles/questionPlaceholder.css");
@@ -125,6 +126,7 @@ var _Assessment = (function () {
 			_Navigator.GetBookmarkData();
 		},
 		ShowQuestionPresenterMode: function () {
+			$(".assessmentSubmit").hide();
 			var currQuestion = gRecordData.Questions[currentQuestionIndex];
 			var correctoption = currQuestion.Options.filter(function (item) {
 				return item.IsCorrect;
