@@ -830,7 +830,10 @@
     opacity: 0;
 }
 .questioninnerwrapper legend{
-    width: 100%
+    width: 100%;
+}
+.summaryquestion legend{
+    width: 100%;
 }
    @-moz-document url-prefix() {
     #radio-elements input[type="radio"]:checked + span:before {
