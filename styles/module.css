@@ -835,6 +835,10 @@
 .summaryquestion legend{
     width: 100%;
 }
+.checkbox-elements{
+    height: 100px;
+    overflow-y: scroll;
+}
    @-moz-document url-prefix() {
     #radio-elements input[type="radio"]:checked + span:before {
         
