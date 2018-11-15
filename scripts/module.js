@@ -5,6 +5,8 @@
     k_disable: function () {
         this.addClass('disabled').attr("aria-disabled", "true").attr("disabled", "disabled");
         if (isIE11version) {
+            if ($(this).attr("type") != undefined && $(this).attr("type") == "radio")
+                return;
             $(this).removeAttr("disabled")
         }
         return;
@@ -309,6 +311,7 @@ var _ModuleCommon = (function () {
                 $(".startbtn").k_disable();
                 $("#linknext").k_enable();
                 if(currentPageData.pageId == "p9" ){
+                    _Navigator.SetPageStatus(true);
                     $("#textareainputhere").k_disable();
                     $("#textareasubmitbtn").k_disable();
                 }
@@ -347,6 +350,9 @@ var _ModuleCommon = (function () {
                 $("input[type='checkbox']").next("label").find(".checkmark").removeClass("checkmark");
             }
             this.SetAccessibility();
+            if(pageDetailData.pageId != "p10"){
+                _Navigator.SetPageStatus(true);
+            }
             if (isFirefox || isIE11version) {
                 this.SetCustomarialabelforRadio();
             }
@@ -440,18 +446,19 @@ var _ModuleCommon = (function () {
                 if (isIOS) {
                     $("#div_feedback p:first").attr("role", "text")
                 }
-                if (isIE11version) {
-                    $("#div_feedback .div_fdkcontent p:first").focus();
-                    $('html,body').animate({ scrollTop: document.body.scrollHeight }, animTime, function () {
-                    });
-                }
-                else {
-                    $('html,body').animate({ scrollTop: document.body.scrollHeight }, animTime, function () {
-                        $("#div_feedback .div_fdkcontent p:first").focus();
+                window.scrollTo(0, document.body.scrollHeight)
+                $("#div_feedback p:first").focus();
+                // if (isIE11version) {
+                //     $("#div_feedback .div_fdkcontent p:first").focus();
+                //     $('html,body').animate({ scrollTop: document.body.scrollHeight }, animTime, function () {
+                //     });
+                // }
+                // else {
+                //     $('html,body').animate({ scrollTop: document.body.scrollHeight }, animTime, function () {
+                //         $("#div_feedback .div_fdkcontent p:first").focus();
 
-                    });
-                }
-                
+                //     });
+                // }
             });
 
         },
@@ -474,8 +481,10 @@ var _ModuleCommon = (function () {
                 $('input[type="radio"]').removeAttr("aria-label");
                 $('input[type="radio"]').next("label").removeAttr("aria-label");
             }
+            $('input[type="radio"].incorrect').removeAttr("aria-label");
             $("input[type='radio']").removeClass("incorrect");
             $('input[type="radio"]').removeAttr("aria-hidden");
+            $('input[type="radio"]').next().removeAttr("aria-hidden");
             $("#div_feedback .div_fdkcontent").html("");
             $("#div_feedback").hide();
             $(".checkmark").show();
@@ -484,13 +493,15 @@ var _ModuleCommon = (function () {
             if(isFirefox && currentPageobj.pageId != "p1" && currentPageobj.pageId != "p10"){
                 this.FFCustomCheckboxAccessbility();
             }
-                if (isIOS) {
-                    $("#radio-elements legend").attr("role", "text")
-                }
-            $('html,body').animate({ scrollTop: document.body.scrollHeigh }, 500, function () { 
-                $("#radio-elements legend").attr("tabindex", "-1");
-                $("#radio-elements legend").focus();
-            });
+                $("#radio-elements legend").attr("tabindex", "-1")
+            if (isIOS) {
+                $("#radio-elements legend").attr("role", "text")
+            }
+            // $('html,body').animate({ scrollTop: document.body.scrollHeight}, 500, function () {
+            //     $("#radio-elements legend").focus();
+            // });
+            window.scrollTo(0,document.body.scrollHeight)
+            $("#radio-elements legend").focus();
         },
         AddReviewData: function (isCorrect, fdkurl) {
             var pageData = this.GetPageDetailData();
