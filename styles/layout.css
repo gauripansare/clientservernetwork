@@ -433,7 +433,7 @@ button:active, textarea:active, select:active,
 }
 .hintcontainerdoc{
     border:none;
-    margin-bottom: none;
+    margin-bottom: unset;
 }
 
 .closehintdoc{
