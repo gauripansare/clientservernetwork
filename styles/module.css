@@ -839,6 +839,9 @@
     height: 100px;
     overflow-y: scroll;
 }
+#Summary .inpputtext{
+    margin: 0px;
+ }
    @-moz-document url-prefix() {
     #radio-elements input[type="radio"]:checked + span:before {
         
