@@ -108,7 +108,7 @@ var _Assessment = (function () {
 			//$(".intro-content-question").show();
 			$(".intro-content-question").fadeIn(600)
 
-			//$("#Questioninfo").focus();
+			$("#Questioninfo").focus();
 			if (gRecordData.Status != "Completed") {
 				$("#linknext").k_disable();
 				if (currentQuestionIndex != 0) {

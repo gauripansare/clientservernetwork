@@ -15,7 +15,7 @@ var _Navigator = (function () {
         "p1": {
             pageId: "p1",
             prevPageId: "",
-            nextPageId: "p2",
+            nextPageId: "p10",
             dataurl: "p1.htm",
             isStartPage: true,
             //ansSet: ["Needs access to Office software for presenting reports, presentations, number crunching, and/ or access to databases", "Needs a powerful system for processing data and numbers"],
@@ -237,8 +237,7 @@ var _Navigator = (function () {
                 currentQuestionIndex = currentQuestionIndex - 1;
                 $("#Summary").empty();
                 $("#Summary").hide();
-               _Assessment.ShowQuestion();
-               
+                _Assessment.ShowQuestion();
             }
             else {
                 this.LoadPage(_currentPageObject.prevPageId);
@@ -251,14 +250,12 @@ var _Navigator = (function () {
                 var custFunction = new Function(_currentPageObject.customNext.jsFunction);
                 custFunction();
             }
-            debugger;
             if (_currentPageObject.pageId == "p10") {
-
                 if (typeof (currentQuestionIndex) != 'undefined' && typeof (gRecordData.Questions) != 'undefined' && (currentQuestionIndex + 1) < gRecordData.Questions.length) {
                     currentQuestionIndex = currentQuestionIndex + 1
                     $("#Questioninfo").show();
-                   _Assessment.ShowQuestion()
-                   
+                    _Assessment.ShowQuestion()
+
                     //this.UpdateProgressBar();
                     if (gRecordData.Status != "Completed" && !this.IsPresenterMode()) {
                         $("#linknext").k_disable();
