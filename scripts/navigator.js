@@ -238,13 +238,6 @@ var _Navigator = (function () {
                 $("#Summary").empty();
                 $("#Summary").hide();
                _Assessment.ShowQuestion();
-               setTimeout(function(){
-                if(isIOS){
-                    $("h2").attr("role", "text");
-                   }
-                $("h2").attr("tabindex", "0");
-                $("h2").focus();
-               },50)
                
             }
             else {
@@ -265,14 +258,7 @@ var _Navigator = (function () {
                     currentQuestionIndex = currentQuestionIndex + 1
                     $("#Questioninfo").show();
                    _Assessment.ShowQuestion()
-                   setTimeout(function(){
-                       if(isIOS){
-                        $("h2").attr("role", "text");
-                       }
-                   $("h2").attr("tabindex", "0");
-                    $("h2").focus()
-                   });
-
+                   
                     //this.UpdateProgressBar();
                     if (gRecordData.Status != "Completed" && !this.IsPresenterMode()) {
                         $("#linknext").k_disable();

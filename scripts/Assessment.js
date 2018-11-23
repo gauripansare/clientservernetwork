@@ -105,8 +105,8 @@ var _Assessment = (function () {
 			$(".question-band .assessmentradio").unwrap();
 			$("#Questioninfo").text("Performance Check: Mini-Quiz: Question " + parseInt(currentQuestionIndex + 1) + " of 5")
 			
-			$(".intro-content-question").show();
-			//$(".intro-content-question").fadeIn(600)
+			//$(".intro-content-question").show();
+			$(".intro-content-question").fadeIn(600)
 
 			//$("#Questioninfo").focus();
 			if (gRecordData.Status != "Completed") {
