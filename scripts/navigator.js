@@ -10,7 +10,7 @@ var _Navigator = (function () {
     //var presentermode = false;
     var submitCounter = 0;
     var bookmarkpageid = "";
-    var quizpageid = "p8";
+    var quizpageid = "p10";
     var _NData = {
         "p1": {
             pageId: "p1",
@@ -181,18 +181,34 @@ var _Navigator = (function () {
                     $(".main-content").load(pageUrl, function () {
                         $(this).fadeTo(600, 1)
                         OnPageLoad();
-                        if(_currentPageId=="p10") // need to change to assessment id
-                        {
-                           _Assessment.ShowQuestion();
-                        }
-                        if(_currentPageObject.pageId == "p2"){
+                        if (_currentPageObject.pageId == "p2") {
                             $("#titleheader").focus();
                         }
-                        else{
-                            $("#progressdiv").focus();
-                            
+                        else if ((isIphone || isAndroid) && _NData[_currentPageId].isLoaded != undefined && _NData[_currentPageId].isLoaded == true) {//iphone android on previous focus is set to header
+                            $("h2").attr("tabindex", "0");
+                            $("h2").focus();
                         }
-                        _Navigator.GetBookmarkData();
+                        else {
+                            //$(".header-informarion .hintlink").focus();
+                            //$("h2").focus();
+                            if (isChrome && !isAndroid) {
+                                $("h2").attr("tabindex", "0");
+                                $("h2").focus();
+                            }
+                            else {
+                                $("#progressdiv").focus();
+                            }
+                            // setReader("progressdiv");
+
+                        }
+
+                        if (_currentPageId == quizpageid) // need to change to assessment id
+                        {
+                            _Assessment.ShowQuestion();
+                            $("h2.pageheading").attr("tabindex", "0");
+                            $("h2").focus();
+                        }
+                        _NData[_currentPageId].isLoaded = true;                        _Navigator.GetBookmarkData();
                     });
                 })
             }
@@ -213,6 +229,7 @@ var _Navigator = (function () {
             }
         },
         Prev: function () {
+            debugger
             if (_currentPageObject.pageId == "p10" && typeof (currentQuestionIndex) != 'undefined' && currentQuestionIndex > 0) {
                 $("#ReviewIns").hide();
                 $(".intro-content-question").show();
@@ -221,6 +238,14 @@ var _Navigator = (function () {
                 $("#Summary").empty();
                 $("#Summary").hide();
                _Assessment.ShowQuestion();
+               setTimeout(function(){
+                if(isIOS){
+                    $("h2").attr("role", "text");
+                   }
+                $("h2").attr("tabindex", "0");
+                $("h2").focus();
+               },50)
+               
             }
             else {
                 this.LoadPage(_currentPageObject.prevPageId);
@@ -233,12 +258,20 @@ var _Navigator = (function () {
                 var custFunction = new Function(_currentPageObject.customNext.jsFunction);
                 custFunction();
             }
+            debugger;
             if (_currentPageObject.pageId == "p10") {
 
                 if (typeof (currentQuestionIndex) != 'undefined' && typeof (gRecordData.Questions) != 'undefined' && (currentQuestionIndex + 1) < gRecordData.Questions.length) {
                     currentQuestionIndex = currentQuestionIndex + 1
                     $("#Questioninfo").show();
                    _Assessment.ShowQuestion()
+                   setTimeout(function(){
+                       if(isIOS){
+                        $("h2").attr("role", "text");
+                       }
+                   $("h2").attr("tabindex", "0");
+                    $("h2").focus()
+                   });
 
                     //this.UpdateProgressBar();
                     if (gRecordData.Status != "Completed" && !this.IsPresenterMode()) {
@@ -258,7 +291,14 @@ var _Navigator = (function () {
                     $("#Summary").show();
                     $("#Questioninfo").hide();
                     $("#Summary").load("pagedata/Summary.htm", function () {
-                       _Assessment.ShowSummary()
+                        _Assessment.ShowSummary();
+                        if (isChrome && !isAndroid) {
+                            $("h2.pageheading").attr("tabindex", "0");
+                            $("h2").focus();
+                        }
+                        else {
+                            $("#progressdiv").focus();
+                        }
                         $("#linkprevious").k_enable();
 
                     })
@@ -507,6 +547,9 @@ var _Navigator = (function () {
         GetPackageType: function () {
             return packageType;
         },
+        GetQuizPageId: function () {
+            return quizpageid;
+        }
     };
 })();
 

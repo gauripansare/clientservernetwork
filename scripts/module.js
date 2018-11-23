@@ -213,12 +213,18 @@ var _ModuleCommon = (function () {
             var chkboxarray = $("input[type='checkbox']").map(function () {
                 return $(this).attr("id");
             }).get();
+            debugger;
             var carialabel = "";
             for (var i = 0; i < chkboxarray.length; i++) {
                 carialabel = "";
-                if ($("#" + chkboxarray[i]).hasClass("correct")) {
-                    $("#" + chkboxarray[i]).attr("cheked", "true");
+                if ($("#" + chkboxarray[i]).hasClass("correct") && ($("#" + chkboxarray[i]).prop('checked') == true) ) {
+                    $("#" + chkboxarray[i]).attr("checked", "true");
                     carialabel = "Correct option selected " + $("#" + chkboxarray[i]).next("label").text();
+                    $("#" + chkboxarray[i]).next("label").attr("aria-hidden", "true");
+                }
+                else if ($("#" + chkboxarray[i]).hasClass("correct") && !$("#" + chkboxarray[i]).attr("checked") ) {
+                    //$("#" + chkboxarray[i]).attr("cheked", "true");
+                    carialabel = "Correct option  " + $("#" + chkboxarray[i]).next("label").text();
                     $("#" + chkboxarray[i]).next("label").attr("aria-hidden", "true");
                 }
                 else if ($("#" + chkboxarray[i]).hasClass("incorrect")) {
@@ -463,7 +469,9 @@ var _ModuleCommon = (function () {
 
         },
         OnContinue: function () {
+            debugger;
             $(".checkmark").show();
+            $('input[type="checkbox"].incorrect').next("label").removeAttr("aria-hidden");
             $('input[type="checkbox"].incorrect').next("label").find("span").removeClass("without-before");
             $('input[type="checkbox"].incorrect').next("label").css({ "font-weight": "normal" })
             $("input[type='checkbox']:not(.correct)").k_enable();
@@ -473,6 +481,17 @@ var _ModuleCommon = (function () {
             $("input[type='checkbox']:not(.correct)").next("label").find("i").remove();
             $('input[type="checkbox"]').removeAttr("aria-hidden");
 
+            if (isFirefox || isIE11version) {
+                $('input[type="checkbox"].correct').attr("aria-hidden","true");
+                $('input[type="checkbox"]:not(.correct)').next("label").removeAttr("aria-hidden");
+                $('input[type="checkbox"]:not(.correct)').next("label").next(".ffreading").remove();
+                //$('input[type="checkbox"]:not(.correct)').next(".ffreading").remove();
+                if (!$('input[type="radio"]:checked').hasClass("correct")){
+                    $('input[type="radio"]').removeAttr("aria-hidden");
+                    $('input[type="radio"]').next("label").next(".ffreading").remove();
+                    $('input[type="radio"]:not(.correct)').next("label").removeAttr("aria-hidden");
+                }
+            }
             if (!$('input[type="radio"]:checked').hasClass("correct")) {
                 $('input[type="radio"]:checked').next("label").find("span").removeClass("without-before")
                 $('input[type="radio"]:checked').next("label").find("i").remove();
@@ -482,13 +501,14 @@ var _ModuleCommon = (function () {
                 $('input[type="radio"]').next("label").removeAttr("aria-label");
             }
             $('input[type="radio"].incorrect').removeAttr("aria-label");
+            $('input[type="radio"].incorrect').next("label").removeAttr("aria-hidden");
+            
             $("input[type='radio']").removeClass("incorrect");
-            $('input[type="radio"]').removeAttr("aria-hidden");
-            $('input[type="radio"]').next().removeAttr("aria-hidden");
+            $("input[type='checkbox']").removeClass("incorrect");
             $("#div_feedback .div_fdkcontent").html("");
             $("#div_feedback").hide();
             $(".checkmark").show();
-            $(".ffreading").remove();
+            
             var currentPageobj = _Navigator.GetCurrentPage();
             if(isFirefox && currentPageobj.pageId != "p1" && currentPageobj.pageId != "p10"){
                 this.FFCustomCheckboxAccessbility();

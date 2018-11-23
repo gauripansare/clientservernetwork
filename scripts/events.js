@@ -248,9 +248,12 @@ $(document).on('click', "#textareasubmitbtn", function (event) {
     var fdkurl ="pagedata/feedbackdata/textareafeedback.htm";
     $("#div_feedback").show();
     $("#div_feedback .div_fdkcontent").load(fdkurl, function () {
-        $("body").animate({
-            scrollTop: $(document).height()
-        }, 1000);
+        $("#div_feedback p:first").attr("tabindex", "-1")
+                if (isIOS) {
+                    $("#div_feedback p:first").attr("role", "text")
+                }
+                window.scrollTo(0, document.body.scrollHeight)
+                $("#div_feedback p:first").focus();
     });
     _ModuleCommon.AddReviewData(true, fdkurl);
     $("#linknext").k_enable();
@@ -269,9 +272,6 @@ $(document).on("keyup", "#textareainputhere", function (event) {
     }
 });
 
-$(document).on('click', "#textareasubmitbtn", function (event) {
-    $("#textareainputhere").k_disable();
-});
 
 
 
