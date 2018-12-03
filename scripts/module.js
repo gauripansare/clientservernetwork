@@ -614,6 +614,14 @@ var _ModuleCommon = (function () {
                 $("#linknext").k_enable();
             }
         },
+        AppendScormReviewFooter: function () {
+            if ($(".ScormReviewFooter").length == 0) {
+                var str = '<div class="ScormReviewFooter"> Review Mode</div>';
+                $("footer").append($(str));
+                $("footer").show();
+                $("#linknext").k_enable();
+            }
+        },
         FFCustomCheckboxAccessbility: function(){
             var cradioboxarray = $("input[type='radio']").map(function () {
                 return $(this).attr("id");

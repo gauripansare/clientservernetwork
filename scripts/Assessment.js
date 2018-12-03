@@ -46,7 +46,9 @@ var _Assessment = (function () {
 
 
 		},
-
+		SetCurrentQuestionIndex: function(questionIndex){
+			currentQuestionIndex = questionIndex;
+		},
 		Shuffle: function (array) {
 			var currentIndex = array.length, temporaryValue, randomIndex;
 
@@ -106,7 +108,12 @@ var _Assessment = (function () {
 			$("#Questioninfo").text("Performance Check: Mini-Quiz: Question " + parseInt(currentQuestionIndex + 1) + " of 5")
 			
 			//$(".intro-content-question").show();
-			$(".intro-content-question").fadeIn(600)
+			if (gRecordData.Status == "Completed") {
+				$(".intro-content-question").show();
+			}
+			else {
+				$(".intro-content-question").fadeIn(600)
+			}
 
 			$("#Questioninfo").focus();
 			if (gRecordData.Status != "Completed") {
