@@ -173,7 +173,8 @@ button:active, textarea:active, select:active,
     width: 100%;
     height: auto;
     z-index: 10;
-    margin-top:8px;
+    margin-top: 8px;
+    position: relative;
 }
 
     #header-progress .progress, .header-content-dock .progress{
@@ -438,4 +439,7 @@ button:active, textarea:active, select:active,
 
 .closehintdoc{
     margin-right:10px;
+}
+.wrapper-img {
+    position: relative;
 }

@@ -303,9 +303,14 @@ window.addEventListener("scroll", function () {
         target.css({ "visibility": "hidden", "top": "-80px"})
         $(".hintcontainerdoc").hide();
         $(".hintdoc").removeClass("expanded")
+        $(".header-content-dock").find(".presentationModeFooter").hide();
 
     }
-});
+if(_Navigator.IsPresenterMode())
+    {
+        $(".header-content-dock").find(".presentationModeFooter").show();
+        $(".header-content-dock .intro-content").css({"margin-top":"30px"})
+    }
+    
 
-
-
+}, false);
