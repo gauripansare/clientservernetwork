@@ -45,7 +45,7 @@ var _Navigator = (function () {
             prevPageId: "p3",
             nextPageId: "p5",
             dataurl: "p4.htm",
-           // hinturl: "hintp4.htm",
+            // hinturl: "hintp4.htm",
             hasActivity: true,
         },
         "p5": {
@@ -53,7 +53,7 @@ var _Navigator = (function () {
             prevPageId: "p4",
             nextPageId: "p6",
             dataurl: "p5.htm",
-           // hinturl: "hintp5.htm",
+            // hinturl: "hintp5.htm",
             hasActivity: true,
         },
         "p6": {
@@ -61,7 +61,7 @@ var _Navigator = (function () {
             prevPageId: "p5",
             nextPageId: "p7",
             dataurl: "p6.htm",
-           // hinturl: "hintp6.htm",
+            // hinturl: "hintp6.htm",
             hasActivity: true,
         },
         "p7": {
@@ -87,17 +87,17 @@ var _Navigator = (function () {
             dataurl: "p9.htm",
             //hinturl: "hintp9.htm",
             hasActivity: true,
-      
+
         },
-        "p10":{
+        "p10": {
             pageId: "p10",
             prevPageId: "p9",
             nextPageId: "",
             dataurl: "p10.htm",
             hasActivity: true,
-            isLastPage:true,
-            isAssessment:true,
-            hideHint:true,
+            isLastPage: true,
+            isAssessment: true,
+            hideHint: true,
         }
     }
     var _StateData = {}
@@ -123,8 +123,8 @@ var _Navigator = (function () {
             $(".start-btn").k_disable();
         }
         if (_Navigator.IsPresenterMode() || _Navigator.IsReviewMode()) {
-            if(isIphone || isAndroid){
-                $("#header-progress .presentationModeFooter").hide();                        
+            if (isIphone || isAndroid) {
+                $("#header-progress .presentationModeFooter").hide();
             }
         }
 
@@ -145,17 +145,17 @@ var _Navigator = (function () {
             if (this.IsPresenterMode()) {
                 _ModuleCommon.AppendFooter();
             }
-            
-            if(this.IsReviewMode()){
+
+            if (this.IsReviewMode()) {
                 _ModuleCommon.AppendScormReviewFooter();
                 _Assessment.SetCurrentQuestionIndex(0);
             }
         },
         LoadPage: function (pageId, jsonObj) {
-           
+
             if (jsonObj == undefined) {
                 jsonObj = {};
-            }          
+            }
 
             bookmarkpageid = pageId;
             _currentPageId = pageId;
@@ -164,14 +164,14 @@ var _Navigator = (function () {
             $("#header-progress").show();
             $("#header-title").show();
             $("footer").show();
-           
+
             $('html,body').css({ scrollTop: 0 })
             if (_currentPageObject.isStartPage != undefined && _currentPageObject.isStartPage) {
                 $("#linkprevious").k_disable();
                 $("#linknext").k_enable();
                 $("footer").hide();
                 $("#header-progress").hide();
-                if(this.IsReviewMode()){
+                if (this.IsReviewMode()) {
                     _ModuleCommon.AppendScormReviewFooter();
                     _Assessment.SetCurrentQuestionIndex(0)
                 }
@@ -190,7 +190,7 @@ var _Navigator = (function () {
             if (_currentPageObject.isLastPage != undefined && _currentPageObject.isLastPage) {
                 $("#linknext").k_disable();
             }
-            
+
             _currentPageObject.isVisited = true;
 
             var pageUrl = _Settings.dataRoot + _currentPageObject.dataurl + _Caching.GetUrlExtension();;
@@ -238,7 +238,7 @@ var _Navigator = (function () {
 
                         if (_currentPageId == quizpageid) // need to change to assessment id
                         {
-if (Summarybookmark) {
+                            if (Summarybookmark) {
 
                                 $(".intro-content-question").hide();
                                 $(".questionwrapper").hide();
@@ -264,10 +264,10 @@ if (Summarybookmark) {
                                 $("h2.pageheading").attr("tabindex", "0");
                                 $("h2").focus();
                             }
-                        
+
 
                         }
-                        _NData[_currentPageId].isLoaded = true;                        _Navigator.GetBookmarkData();
+                        _NData[_currentPageId].isLoaded = true; _Navigator.GetBookmarkData();
                     });
                 })
             }
@@ -369,14 +369,14 @@ if (Summarybookmark) {
                     visitpage++;
                 }
             }
-            visitpage += this.GetAnswerCount() ;
+            visitpage += this.GetAnswerCount();
             return visitpage;
         },
-        GetAnswerCount:function(){
-          var cnt =  (gRecordData.Questions.filter(function (item) {
+        GetAnswerCount: function () {
+            var cnt = (gRecordData.Questions.filter(function (item) {
                 return item.IsAnswered;
-            }).length  ) 
-           
+            }).length)
+
             return cnt;
         },
         UpdateProgressBar: function () {
@@ -402,14 +402,13 @@ if (Summarybookmark) {
                     ObtainPoint += _NData[i].points
                 }
             }
-            var quizScore =0;
-            for(var b=0; b < gRecordData.Questions.length; b++){
-                if(gRecordData.Questions[b].IsAnswered && gRecordData.Questions[b].IsCorrect )
-                {
-                    quizScore +=2;
+            var quizScore = 0;
+            for (var b = 0; b < gRecordData.Questions.length; b++) {
+                if (gRecordData.Questions[b].IsAnswered && gRecordData.Questions[b].IsCorrect) {
+                    quizScore += 2;
                 }
             }
-            var score = ((ObtainPoint +quizScore)/ (totalsimscore + gRecordData.AssessmentScore)) * 100;
+            var score = ((ObtainPoint + quizScore) / (totalsimscore + gRecordData.AssessmentScore)) * 100;
             return score.toFixed(0);
         },
         UpdateScore: function () {
@@ -422,10 +421,10 @@ if (Summarybookmark) {
                 this.UpdateScore();
             }
         },
-        IsReviewMode: function(){
+        IsReviewMode: function () {
             return isReviewMode;
         },
-        SetIsReviewMode: function(isReviewModeStatus){
+        SetIsReviewMode: function (isReviewModeStatus) {
             isReviewMode = isReviewModeStatus;
         },
         SetPageStatus: function (isAnswered) {
@@ -469,7 +468,7 @@ if (Summarybookmark) {
             }
         },
         GetBookmarkData: function () {
-            if (!this.IsScorm() && !this.IsRevel())
+            if (!this.IsScorm() && !this.IsRevel() && this.IsReviewMode())
                 return;
             var bookmarkobj = {}
             bookmarkobj.BMPageId = bookmarkpageid;
@@ -479,6 +478,7 @@ if (Summarybookmark) {
             //bookmarkobj.ProgressLevels = progressLevels;
             bookmarkobj.ReviewData = _ModuleCommon.GetReviewData();
             bookmarkobj.AssessmentData = _Assessment.Getbookmarkdata();
+            bookmarkobj.Summarybookmark = _Navigator.GetSummarybookmark();
             if (this.IsRevel()) {
                 if (k_Revel.get_LaunchData().mode == LaunchModes.do) {
                     var suspend_data = JSON.stringify(bookmarkobj);
@@ -507,6 +507,9 @@ if (Summarybookmark) {
             }
         },
         SetBookMarkPage: function () {
+            if(this.IsReviewMode()){
+                return;
+            }
             if (!this.IsScorm() && !this.IsRevel())
                 return;
             if (this.IsScorm()) {
@@ -517,7 +520,7 @@ if (Summarybookmark) {
             }
         },
         SetBookmarkData: function () {
-            
+
             var bookmarkdata;
             if (this.IsScorm()) {
                 bookmarkdata = _ScormUtility.GetSuspendData();
@@ -530,6 +533,7 @@ if (Summarybookmark) {
                 bookmarkdata = JSON.parse(bookmarkdata);
                 bookmarkpageid = bookmarkdata.BMPageId;
                 retrycnt = bookmarkdata.BMretrycnt;
+                Summarybookmark = bookmarkdata.Summarybookmark
                 //_ModuleCommon.Setg_RuntimeData(bookmarkdata.BMg_RuntimeData);
                 this.SetNavigatorBMData(bookmarkdata.VisistedPages)
                 //progressLevels = bookmarkdata.ProgressLevels;
@@ -540,19 +544,19 @@ if (Summarybookmark) {
         GetBookMarkPage: function () {
             return bookmarkpageid;
         },
-        GetBookMarkRetrycnt: function(){
+        GetBookMarkRetrycnt: function () {
             return retrycnt;
         },
-        SetBookMarkRetrycnt: function(){
+        SetBookMarkRetrycnt: function () {
             retrycnt = retrycnt + 1;
         },
         Initialize: function () {
-            
+
             if (packageType == "scorm") {
                 _ScormUtility.Init();
                 _Navigator.SetBookmarkData();
                 //bookmarkpageid = _ScormUtility.GetBookMark();
-                if(_ScormUtility.IsScormReviewMode()){
+                if (_ScormUtility.IsScormReviewMode()) {
                     _Navigator.SetIsReviewMode(true);
                 }
                 this.GotoBookmarkPage();
@@ -593,9 +597,13 @@ if (Summarybookmark) {
             }
         },
         GotoBookmarkPage: function () {
-
-            if (bookmarkpageid != undefined && bookmarkpageid != "") {
-                _Navigator.LoadPage(bookmarkpageid)
+            if (bookmarkpageid != undefined && bookmarkpageid != "" && !this.IsReviewMode()) {
+                if (Summarybookmark) {
+                    _Navigator.LoadPage(quizpageid);
+                }
+                else {
+                    _Navigator.LoadPage(bookmarkpageid)
+                }
             }
             else {
                 _Navigator.Start();
@@ -629,27 +637,27 @@ function setReader(idToStartReading) {
 
 
 function removeCSS(cssFileToRemove) {
-	for(var w=0; w < document.styleSheets.length; w++ ){
-		if(document.styleSheets[w].href.indexOf(cssFileToRemove) != -1 ) {
-			document.styleSheets[w].disabled = true;
-		}
-	}
+    for (var w = 0; w < document.styleSheets.length; w++) {
+        if (document.styleSheets[w].href.indexOf(cssFileToRemove) != -1) {
+            document.styleSheets[w].disabled = true;
+        }
+    }
 }
 function addCSS(cssFileToAdd) {
-	var isCSSAlreadyAdded = false;
-	for(var w=0; w < document.styleSheets.length; w++ ){
-		if(document.styleSheets[w].href.indexOf(cssFileToAdd) != -1 ) {
-			isCSSAlreadyAdded = false;
-		}
-	}
-	console.log(isCSSAlreadyAdded + " --")
-	if(! isCSSAlreadyAdded){
-		var newlink = document.createElement("link");
-		newlink.setAttribute("rel", "stylesheet");
-		newlink.setAttribute("type", "text/css");
-		newlink.setAttribute("href", cssFileToAdd);
-		document.getElementsByTagName("head").item(0).appendChild(newlink);
-	}
+    var isCSSAlreadyAdded = false;
+    for (var w = 0; w < document.styleSheets.length; w++) {
+        if (document.styleSheets[w].href.indexOf(cssFileToAdd) != -1) {
+            isCSSAlreadyAdded = false;
+        }
+    }
+    console.log(isCSSAlreadyAdded + " --")
+    if (!isCSSAlreadyAdded) {
+        var newlink = document.createElement("link");
+        newlink.setAttribute("rel", "stylesheet");
+        newlink.setAttribute("type", "text/css");
+        newlink.setAttribute("href", cssFileToAdd);
+        document.getElementsByTagName("head").item(0).appendChild(newlink);
+    }
 }
 
 function changeCSS(cssFile, cssLinkIndex) {
