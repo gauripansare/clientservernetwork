@@ -1,7 +1,7 @@
 ﻿//This api will contain navigation logic and page load.
 //It will also handle the question navigation if the page is having multiple questions.
 var _Navigator = (function () {
-    var packageType = "";//presenter/scorm/revel
+    var packageType = "scorm";//presenter/scorm/revel
     var isReviewMode = false;
     var _currentPageId = "";
     var _currentPageObject = {};
@@ -13,6 +13,7 @@ var _Navigator = (function () {
     var bookmarkpageid = "";
     var retrycnt = 1;
     var quizpageid = "p10";
+    var Summarybookmark = false;
     var _NData = {
         "p1": {
             pageId: "p1",
@@ -237,14 +238,42 @@ var _Navigator = (function () {
 
                         if (_currentPageId == quizpageid) // need to change to assessment id
                         {
-                            _Assessment.ShowQuestion();
-                            $("h2.pageheading").attr("tabindex", "0");
-                            $("h2").focus();
+if (Summarybookmark) {
+
+                                $(".intro-content-question").hide();
+                                $(".questionwrapper").hide();
+                                $("#Summary").show();
+                                $("#Questioninfo").hide();
+                                $("#Summary").load("pagedata/Summary.htm", function () {
+                                    _Assessment.ShowSummary();
+                                    if (isChrome && !isAndroid) {
+                                        $("h2.pageheading").attr("tabindex", "0");
+                                        $("h2").focus();
+                                    }
+                                    else {
+                                        $("#progressdiv").focus();
+                                    }
+                                    $("#linkprevious").k_enable();
+
+                                })
+                                $("#climate-deal").css("margin-left", "23%");
+                                $("#linknext").k_disable();
+                            }
+                            else {
+                                _Assessment.ShowQuestion();
+                                $("h2.pageheading").attr("tabindex", "0");
+                                $("h2").focus();
+                            }
+                        
+
                         }
                         _NData[_currentPageId].isLoaded = true;                        _Navigator.GetBookmarkData();
                     });
                 })
             }
+        },
+        GetSummarybookmark: function () {
+            return Summarybookmark;
         },
         LoadDefaultQuestion: function () {
             if (_currentPageObject.questions.length > 0) {
@@ -262,7 +291,7 @@ var _Navigator = (function () {
             }
         },
         Prev: function () {
-            debugger
+            Summarybookmark = false;
             if (_currentPageObject.pageId == "p10" && typeof (currentQuestionIndex) != 'undefined' && currentQuestionIndex > 0) {
                 $("#ReviewIns").hide();
                 $(".intro-content-question").show();
@@ -278,6 +307,7 @@ var _Navigator = (function () {
 
         },
         Next: function () {
+            Summarybookmark = false;
             $("#linkprevious").k_enable();
             if (_currentPageObject.customNext != undefined && !_currentPageObject.customNext.isComplete) {
                 var custFunction = new Function(_currentPageObject.customNext.jsFunction);
@@ -307,6 +337,8 @@ var _Navigator = (function () {
                     $("#Summary").show();
                     $("#Questioninfo").hide();
                     $("#Summary").load("pagedata/Summary.htm", function () {
+                        Summarybookmark = true;
+                        _Navigator.GetBookmarkData();
                         _Assessment.ShowSummary();
                         if (isChrome && !isAndroid) {
                             $("h2.pageheading").attr("tabindex", "0");
