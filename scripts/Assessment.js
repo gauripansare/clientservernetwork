@@ -364,6 +364,9 @@ var _Assessment = (function () {
 			currentQuestionIndex = assessmentobj.currentQuestionIndex;
 			gRecordData.Status = assessmentobj.status;
 			gRecordData.Score = assessmentobj.score;
+			if (assessmentobj.Qdata.length == gRecordData.Questions.length) {
+				gRecordData.Status = "Completed";
+			}
 			if (assessmentobj.Qdata != undefined && assessmentobj.Qdata.length > 0) {
 				for (var i = 0; i < gRecordData.Questions.length; i++) {
 					for (j = 0; j < assessmentobj.Qdata.length; j++) {
