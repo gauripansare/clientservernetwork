@@ -316,7 +316,7 @@ var _ModuleCommon = (function () {
                 this.DisplayUserReviewMode();
             }
             if (_Navigator.IsPresenterMode() == true) {
-                $(".startbtn").k_disable();
+                //$(".startbtn").k_disable();
                 $("#linknext").k_enable();
                 /*if(currentPageData.pageId == "p9" ){
                     _Navigator.SetPageStatus(true);
