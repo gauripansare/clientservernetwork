@@ -318,6 +318,9 @@ var _ModuleCommon = (function () {
             if (_Navigator.IsAnswered() && !_Navigator.GetCurrentPage().isStartPage ) {
                 this.DisplayUserReviewMode();
             }
+            if(currentPageData.pageId == "p9" ){                
+                $("#textareasubmitbtn").link_k_disable();
+            }
             if (_Navigator.IsPresenterMode() == true) {
                 //$(".startbtn").k_disable();
                 $("#linknext").k_enable();

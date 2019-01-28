@@ -125,7 +125,7 @@ var _Navigator = (function () {
             $("#textareainputhere").k_disable();
             $("#textareasubmitbtn").link_k_disable();
             $("#linknext").k_enable();
-            $(".start-btn").link_k_disable();
+            $("#start").link_k_disable();
         }
         if (_Navigator.IsPresenterMode() || _Navigator.IsReviewMode()) {
             if (isIphone || isAndroid) {
