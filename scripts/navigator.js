@@ -123,9 +123,9 @@ var _Navigator = (function () {
             $("input[type='radio']").k_disable();
             $("input[type='checkbox']").k_disable()
             $("#textareainputhere").k_disable();
-            $("#textareasubmitbtn").k_disable();
+            $("#textareasubmitbtn").link_k_disable();
             $("#linknext").k_enable();
-            $(".start-btn").k_disable();
+            $(".start-btn").link_k_disable();
         }
         if (_Navigator.IsPresenterMode() || _Navigator.IsReviewMode()) {
             if (isIphone || isAndroid) {
@@ -224,14 +224,14 @@ var _Navigator = (function () {
                             $("#titleheader").focus();
                         }
                         else if ((isIphone || isAndroid) && _NData[_currentPageId].isLoaded != undefined && _NData[_currentPageId].isLoaded == true) {//iphone android on previous focus is set to header
-                            $("h2").attr("tabindex", "0");
+                            $("h2").attr("tabindex", "-1");
                             $("h2").focus();
                         }
                         else {
                             //$(".header-informarion .hintlink").focus();
                             //$("h2").focus();
                             if (isChrome && !isAndroid) {
-                                $("h2").attr("tabindex", "0");
+                                $("h2").attr("tabindex", "-1");
                                 $("h2").focus();
                             }
                             else {
@@ -252,7 +252,7 @@ var _Navigator = (function () {
                                 $("#Summary").load("pagedata/Summary.htm", function () {
                                     _Assessment.ShowSummary();
                                     if (isChrome && !isAndroid) {
-                                        $("h2.pageheading").attr("tabindex", "0");
+                                        $("h2.pageheading").attr("tabindex", "-1");
                                         $("h2").focus();
                                     }
                                     else {
@@ -266,7 +266,7 @@ var _Navigator = (function () {
                             }
                             else {
                                 _Assessment.ShowQuestion();
-                                $("h2.pageheading").attr("tabindex", "0");
+                                $("h2.pageheading").attr("tabindex", "-1");
                                 $("h2").focus();
                             }
 
@@ -344,7 +344,7 @@ var _Navigator = (function () {
                         _Navigator.GetBookmarkData();
                         _Assessment.ShowSummary();
                         if (isChrome && !isAndroid) {
-                            $("h2.pageheading").attr("tabindex", "0");
+                            $("h2.pageheading").attr("tabindex", "-1");
                             $("h2").focus();
                         }
                         else {

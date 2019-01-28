@@ -11,6 +11,9 @@
         }
         return;
     },
+    link_k_disable: function() {
+        return this.addClass('disabled').attr("aria-disabled","true");
+    },
     k_IsDisabled: function () {
         if (this.hasClass('disabled')) { return true; } else { return false; }
     }
@@ -94,10 +97,10 @@ var _ModuleCommon = (function () {
                     }, 1000);
                 });
                 $("textarea").k_disable();
-                $("#textareasubmitbtn").k_disable();
+                $("#textareasubmitbtn").link_k_disable();
             }
             else {
-                $("input").k_disable();
+                $("input").link_k_disable();
                 this.DisplayCorrectIncorrect();
                 this.ShowFeedbackReviewMode();
             }
@@ -310,7 +313,7 @@ var _ModuleCommon = (function () {
             if (pageDetailData != undefined && pageDetailData.radio != undefined) {
                 $("input[type='checkbox']").addClass("pagecheckbox");
                 $("input[type='radio']").addClass("pageradio");
-                $("#submitbtn").k_disable();
+                $("#submitbtn").link_k_disable();
             }
             if (_Navigator.IsAnswered() && !_Navigator.GetCurrentPage().isStartPage ) {
                 this.DisplayUserReviewMode();
@@ -321,7 +324,7 @@ var _ModuleCommon = (function () {
                 /*if(currentPageData.pageId == "p9" ){
                     _Navigator.SetPageStatus(true);
                     $("#textareainputhere").k_disable();
-                    $("#textareasubmitbtn").k_disable();
+                    $("#textareasubmitbtn").link_k_disable();
                 }*/
 
                 if (currentPageData.pageId != "p10" && currentPageData.pageId != "p1") {
@@ -380,7 +383,7 @@ var _ModuleCommon = (function () {
                 $("#submitbtn").k_enable();
             }
             else {
-                $("#submitbtn").k_disable();
+                $("#submitbtn").link_k_disable();
             }
         },
         CalculateScore: function () {
@@ -448,7 +451,7 @@ var _ModuleCommon = (function () {
                 }
             }
             $("#div_feedback").show();
-            $("input").k_disable();
+            $("input").link_k_disable();
             $("#div_feedback").css("display", "inline-block");
             $("#div_feedback .div_fdkcontent").load(fdbkUrl, function () {
                 $("#div_feedback p:first").attr("tabindex", "-1")

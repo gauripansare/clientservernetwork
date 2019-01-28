@@ -856,6 +856,9 @@
 #Summary .inpputtext{
     margin: 0px;
  }
+ .option_div p {
+    color: #707070;
+}
    @-moz-document url-prefix() {
     #radio-elements input[type="radio"]:checked + span:before {
         

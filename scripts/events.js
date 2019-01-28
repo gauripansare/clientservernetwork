@@ -3,6 +3,7 @@ var hotspot;
 var touchend = false;
 var touchend1 = false;
 $(document).on("click", ".divHotSpot", function (event) {
+    if ($(this).k_IsDisabled()) return;
     if (_Navigator.IsPresenterMode()) {
         return;
     }
@@ -37,7 +38,7 @@ $(document).on("click", "#linknext", function (event) {
     _Navigator.Next();
 });
 $(document).on("click", ".hintdoc", function (event) {
-    debugger;
+    if ($(this).k_IsDisabled()) return;
     if ($(this).hasClass("hintdoc")) {
         if ($(this).hasClass("expanded")) {
             $(this).removeClass("expanded")
@@ -138,6 +139,7 @@ $(window).resize(function () {
 });
 
 $(document).on('click', ".activityimg", function (event) {
+    if ($(this).k_IsDisabled()) return;
     if ($(".divHotSpot").hasClass("disabled") || $(".divHotSpot").length == 0)
         return;
     _ModuleCommon.AddEditPropertiesClick(event);
@@ -145,13 +147,15 @@ $(document).on('click', ".activityimg", function (event) {
 
 
 $(document).on('click', "#start", function (event) {
+    if ($(this).k_IsDisabled()) return;
     _Navigator.Next();
 });
 $(document).on('click', "#submitbtn", function (event) {
-  
+    if ($(this).k_IsDisabled()) return;
     _ModuleCommon.OnSubmit();
 });
 $(document).on('click', "#continuebtn", function (event) {
+    if ($(this).k_IsDisabled()) return;
     _ModuleCommon.OnContinue();
 });
 
@@ -228,7 +232,7 @@ $(document).on("change", ".assessmentradio", function (event) {
     if ($(this).k_IsDisabled()) return;
     if ($(this).hasClass("disabled"))
         return;
-    $(".assessmentSubmit").k_enable();
+    $(".assessmentSubmit").link_k_enable();
 });
 $(document).on("click", ".assessmentSubmit", function (event) {
     if ($(this).k_IsDisabled()) return;
@@ -241,9 +245,9 @@ $(document).on("click", ".assessmentSubmit", function (event) {
     _Navigator.Next();
 });
 $(document).on('click', "#textareasubmitbtn", function (event) {
-   
+    if ($(this).k_IsDisabled()) return;
     $("#textareainputhere").k_disable();
-    $("#textareasubmitbtn").k_disable();
+    $("#textareasubmitbtn").link_k_disable();
     _Navigator.GetCurrentPage().isAnswered = true;
     var fdkurl ="pagedata/feedbackdata/textareafeedback.htm";
     $("#div_feedback").show();
@@ -268,7 +272,7 @@ $(document).on("keyup", "#textareainputhere", function (event) {
         $("#textareasubmitbtn").k_enable();
     }
     else{
-        $("#textareasubmitbtn").k_disable();
+        $("#textareasubmitbtn").link_k_disable();
     }
 });
 
