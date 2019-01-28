@@ -232,7 +232,7 @@ $(document).on("change", ".assessmentradio", function (event) {
     if ($(this).k_IsDisabled()) return;
     if ($(this).hasClass("disabled"))
         return;
-    $(".assessmentSubmit").link_k_enable();
+    $(".assessmentSubmit").k_enable();
 });
 $(document).on("click", ".assessmentSubmit", function (event) {
     if ($(this).k_IsDisabled()) return;
