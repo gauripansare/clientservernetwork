@@ -100,7 +100,8 @@ var _ModuleCommon = (function () {
                 $("#textareasubmitbtn").link_k_disable();
             }
             else {
-                $("input").link_k_disable();
+                $('input:not(#submitbtn)').k_disable();
+                $('#submitbtn').link_k_disable();
                 this.DisplayCorrectIncorrect();
                 this.ShowFeedbackReviewMode();
             }
@@ -454,7 +455,8 @@ var _ModuleCommon = (function () {
                 }
             }
             $("#div_feedback").show();
-            $("input").link_k_disable();
+            $('input:not(#submitbtn)').k_disable();
+            $('#submitbtn').link_k_disable();
             $("#div_feedback").css("display", "inline-block");
             $("#div_feedback .div_fdkcontent").load(fdbkUrl, function () {
                 $("#div_feedback p:first").attr("tabindex", "-1")
