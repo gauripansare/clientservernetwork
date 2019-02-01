@@ -11,8 +11,8 @@
         }
         return;
     },
-    link_k_disable: function() {
-        return this.addClass('disabled').attr("aria-disabled","true");
+    link_k_disable: function () {
+        return this.addClass('disabled').attr("aria-disabled", "true");
     },
     k_IsDisabled: function () {
         if (this.hasClass('disabled')) { return true; } else { return false; }
@@ -223,12 +223,12 @@ var _ModuleCommon = (function () {
             var carialabel = "";
             for (var i = 0; i < chkboxarray.length; i++) {
                 carialabel = "";
-                if ($("#" + chkboxarray[i]).hasClass("correct") && ($("#" + chkboxarray[i]).prop('checked') == true) ) {
+                if ($("#" + chkboxarray[i]).hasClass("correct") && ($("#" + chkboxarray[i]).prop('checked') == true)) {
                     $("#" + chkboxarray[i]).attr("checked", "true");
                     carialabel = "Correct option selected " + $("#" + chkboxarray[i]).next("label").text();
                     $("#" + chkboxarray[i]).next("label").attr("aria-hidden", "true");
                 }
-                else if ($("#" + chkboxarray[i]).hasClass("correct") && !$("#" + chkboxarray[i]).attr("checked") ) {
+                else if ($("#" + chkboxarray[i]).hasClass("correct") && !$("#" + chkboxarray[i]).attr("checked")) {
                     //$("#" + chkboxarray[i]).attr("cheked", "true");
                     carialabel = "Correct option  " + $("#" + chkboxarray[i]).next("label").text();
                     $("#" + chkboxarray[i]).next("label").attr("aria-hidden", "true");
@@ -316,10 +316,10 @@ var _ModuleCommon = (function () {
                 $("input[type='radio']").addClass("pageradio");
                 $("#submitbtn").link_k_disable();
             }
-            if (_Navigator.IsAnswered() && !_Navigator.GetCurrentPage().isStartPage ) {
+            if (_Navigator.IsAnswered() && !_Navigator.GetCurrentPage().isStartPage) {
                 this.DisplayUserReviewMode();
             }
-            if(currentPageData.pageId == "p9" ){                
+            if (currentPageData.pageId == "p9") {
                 $("#textareasubmitbtn").link_k_disable();
             }
             if (_Navigator.IsPresenterMode() == true) {
@@ -334,12 +334,12 @@ var _ModuleCommon = (function () {
                 if (currentPageData.pageId != "p10" && currentPageData.pageId != "p1") {
                     this.LoadPresenterMod();
                 }
-                            }
-            if (currentPageData.pageId != "p10" && currentPageData.pageId != "p9" && currentPageData.pageId != "p1" ) {
+            }
+            if (currentPageData.pageId != "p10" && currentPageData.pageId != "p9" && currentPageData.pageId != "p1") {
                 this.SetRadioboxPosition();
             }
-            
-            if(isFirefox && currentPageData.pageId != "p1" && currentPageData.pageId != "p10"){
+
+            if ((isFirefox || isIE11version) && currentPageData.pageId != "p1" && currentPageData.pageId != "p10") {
                 this.FFCustomCheckboxAccessbility();
             }
 
@@ -494,11 +494,11 @@ var _ModuleCommon = (function () {
             $('input[type="checkbox"]').removeAttr("aria-hidden");
 
             if (isFirefox || isIE11version) {
-                $('input[type="checkbox"].correct').attr("aria-hidden","true");
+                $('input[type="checkbox"].correct').attr("aria-hidden", "true");
                 $('input[type="checkbox"]:not(.correct)').next("label").removeAttr("aria-hidden");
                 $('input[type="checkbox"]:not(.correct)').next("label").next(".ffreading").remove();
                 //$('input[type="checkbox"]:not(.correct)').next(".ffreading").remove();
-                if (!$('input[type="radio"]:checked').hasClass("correct")){
+                if (!$('input[type="radio"]:checked').hasClass("correct")) {
                     $('input[type="radio"]').removeAttr("aria-hidden");
                     $('input[type="radio"]').next("label").next(".ffreading").remove();
                     $('input[type="radio"]:not(.correct)').next("label").removeAttr("aria-hidden");
@@ -514,27 +514,30 @@ var _ModuleCommon = (function () {
             }
             $('input[type="radio"].incorrect').removeAttr("aria-label");
             $('input[type="radio"].incorrect').next("label").removeAttr("aria-hidden");
-            
+
             $("input[type='radio']").removeClass("incorrect");
             $("input[type='checkbox']").removeClass("incorrect");
             $("#div_feedback .div_fdkcontent").html("");
-            $("#div_feedback").attr("aria-hidden","true");
+            $("#div_feedback").attr("aria-hidden", "true");
             $("#div_feedback").hide();
             $(".checkmark").show();
-            
+
             var currentPageobj = _Navigator.GetCurrentPage();
-            if(isFirefox && currentPageobj.pageId != "p1" && currentPageobj.pageId != "p10"){
+            if (isFirefox && currentPageobj.pageId != "p1" && currentPageobj.pageId != "p10") {
                 this.FFCustomCheckboxAccessbility();
             }
-                $("#radio-elements legend").attr("tabindex", "-1")
+            $("#radio-elements legend").attr("tabindex", "-1")
             if (isIOS) {
                 $("#radio-elements legend").attr("role", "text")
             }
             // $('html,body').animate({ scrollTop: document.body.scrollHeight}, 500, function () {
             //     $("#radio-elements legend").focus();
             // });
-            window.scrollTo(0,document.body.scrollHeight)
+            window.scrollTo(0, document.body.scrollHeight)
             $("#radio-elements legend").focus();
+            if (isFirefox || isIE11version) {
+                this.FFCustomCheckboxAccessbility();
+            }
         },
         AddReviewData: function (isCorrect, fdkurl) {
             var pageData = this.GetPageDetailData();
@@ -613,19 +616,19 @@ var _ModuleCommon = (function () {
                 $("#div_feedback").css("margin-top", (pdiff + 35) + "px");
             }
         },
-        AppendFooter: function () {           
-                $("#header-progress .presentationModeFooter").show();             
-                
-                $("footer").show();
-                $("#linknext").k_enable();           
-            
+        AppendFooter: function () {
+            $("#header-progress .presentationModeFooter").show();
+
+            $("footer").show();
+            $("#linknext").k_enable();
+
         },
         AppendScormReviewFooter: function () {
             $(".presentationModeFooter").html('Review Mode');
-            $("#header-progress .presentationModeFooter").show();           
-                
-                $("footer").show();
-                $("#linknext").k_enable();   
+            $("#header-progress .presentationModeFooter").show();
+
+            $("footer").show();
+            $("#linknext").k_enable();
             /*
             if ($(".ScormReviewFooter").length == 0) {
                 var str = '<div class="ScormReviewFooter"> Review Mode</div>';
@@ -633,16 +636,23 @@ var _ModuleCommon = (function () {
                 $("footer").show();
                 $("#linknext").k_enable();
             }*/
-        },
-        FFCustomCheckboxAccessbility: function(){
-            var cradioboxarray = $("input[type='radio']").map(function () {
+        },        
+        FFCustomCheckboxAccessbility: function () {
+            var radioboxarray = $("input[type='radio']").map(function () {
                 return $(this).attr("id");
             }).get();
-            for (var i = 0; i < cradioboxarray.length; i++) {
-                var aria_label = $("label[for='"+cradioboxarray[i]+"'] p:first").html();
-                $("label[for='"+cradioboxarray[i]+"'] ").attr("aria-hidden","true");
-                $("#"+cradioboxarray[i]).attr("aria-label", aria_label +" Server");
-
+            for (var i = 0; i < radioboxarray.length; i++) {
+                var aria_label = $("label[for='" + radioboxarray[i] + "'] p:first").html();
+                $("label[for='" + radioboxarray[i] + "'] ").attr("aria-hidden", "true");
+                $("#" + radioboxarray[i]).attr("aria-label", aria_label + " Server");
+            }
+            var checkboxarray = $("input[type='checkbox']").map(function () {
+                return $(this).attr("id");
+            }).get();
+            for (var i = 0; i < checkboxarray.length; i++) {
+                var aria_label = $("label[for='" + checkboxarray[i] + "']").text();
+                $("label[for='" + checkboxarray[i] + "'] ").attr("aria-hidden", "true");
+                $("#" + checkboxarray[i]).attr("aria-label", aria_label);
             }
         },
         IECustomCheckboxAccessbility: function () {
